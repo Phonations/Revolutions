@@ -87,7 +87,7 @@ class PlayState extends FlxState
 		spriteBG_stars.updateHitbox();
 		spriteBG_stars.scrollFactor.set(.5,.5);
 		add(spriteBG_stars);
-FlxAngle.
+
 		// Setup pause state
 
 //		persistantSubState = new PauseState();
