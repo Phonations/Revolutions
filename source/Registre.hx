@@ -15,4 +15,7 @@ class Registre
 	public static var LEVEL_SIZE : FlxPoint;
 	
 	public static var saves:Array<FlxSave> = [];
+	
+	public static var keyPressedAngleAcceleration:Int = 2;
+	public static var engineAcceleration:Int = 50;
 }

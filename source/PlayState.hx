@@ -114,11 +114,11 @@ class PlayState extends FlxState
 
 		FlxG.autoPause = false;
 
-	
 		Registre.level = 1;
 		//load level
 		loadLevel("assets/data/lvl" + Registre.level + ".tmx");
 		
+		cameraGame.follow(player);
 	}
 
 
@@ -139,8 +139,6 @@ class PlayState extends FlxState
 		super.destroy();
 	}
 
-
-
 	override public function onFocusLost():Void
 	{
 		FlxTimer.manager.active = false;
@@ -155,19 +153,22 @@ class PlayState extends FlxState
 		persistantSubState.isPersistant = false;
 		openSubState(persistantSubState);
 	}
+	
+
 
 	override public function update():Void
 	{
-		player.angle = FlxAngle.angleBetweenMouse(player, true);
-		if (FlxG.mouse.justPressed)
-		{
-			player.engine = true;
-		}
+		if (FlxG.keys.justPressed.ESCAPE)
+			flash.system.System.exit(0);
 		
-		if (FlxG.mouse.justReleased)
-		{
-			player.engine = false;
-		}
+		if (FlxG.keys.pressed.LEFT)
+			player.angle -= Registre.keyPressedAngleAcceleration;
+		if (FlxG.keys.pressed.RIGHT)
+			player.angle += Registre.keyPressedAngleAcceleration;
+		player.engine = FlxG.keys.pressed.UP || FlxG.mouse.pressed;
+		
+		//player.angle = FlxAngle.angleBetweenPoint(player, FlxG.mouse.getWorldPosition(), true);
+		
 		
 		super.update();
 	}
@@ -197,7 +198,6 @@ class PlayState extends FlxState
 		player = new Spaceship(FlxG.width / 2, FlxG.height / 2);
 		add(player);
 		player.velocity.x = 50;
-		cameraGame.follow(player);		
 		
 		//add planets		
 		planets = new FlxSpriteGroup();		
