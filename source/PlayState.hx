@@ -114,16 +114,9 @@ class PlayState extends FlxState
 
 		FlxG.autoPause = false;
 
-		// Add spaceship
-
-		player = new Spaceship(FlxG.width / 2, FlxG.height / 2);
-		add(player);
-		player.velocity.x = 50;
-		cameraGame.follow(player);
+	
 		Registre.level = 1;
 		//load level
-		planets = new FlxSpriteGroup();		
-		add(planets);
 		loadLevel("assets/data/lvl" + Registre.level + ".tmx");
 		
 	}
@@ -199,6 +192,16 @@ class PlayState extends FlxState
 	{
 		var tiledLevel : TiledMap = new TiledMap(data);	
 		
+		
+		// Add spaceship
+		player = new Spaceship(FlxG.width / 2, FlxG.height / 2);
+		add(player);
+		player.velocity.x = 50;
+		cameraGame.follow(player);		
+		
+		//add planets		
+		planets = new FlxSpriteGroup();		
+		add(planets);
 		for (group in tiledLevel.objectGroups)
 		{
 			for (obj in group.objects)
