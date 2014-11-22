@@ -3,6 +3,8 @@ package;
 import flixel.FlxSprite;
 import flixel.FlxState;
 import flixel.text.FlxText;
+import flixel.tweens.FlxTween;
+import flixel.tweens.FlxTween.TweenOptions;
 import flixel.ui.FlxButton;
 import flixel.util.FlxMath;
 import flixel.util.FlxPoint;
@@ -22,6 +24,9 @@ class MenuState extends FlxState
 	private var startText :FlxText;
 	private var start : FlxButton;
 	private var lvlButtonGroup : FlxTypedGroup<FlxButton>;
+	private var spPlanet : FlxSprite;
+	private var spSpaceship : FlxSprite;
+	private var tw : FlxTween;
 
 
 	/**
@@ -31,54 +36,35 @@ class MenuState extends FlxState
 	{
 		super.create();
 
-		#if mobile
-		Registre.mobileZoom = 2;
-		#else
-		Registre.mobileZoom = 1;
-		#end
-
-		FlxG.debugger.visible = true;
-
-		Registre.lockedLevels = [false,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true];
+		Registre.lockedLevels = [false,false];
 
 		FlxG.camera.antialiasing = true;
 
 		Registre.CoefScale = new FlxPoint(FlxG.width / 1920, FlxG.height / 1080);
 
 		spriteBG = new FlxSprite(0, 0);
-		spriteBG.loadGraphic('assets/images/BG.png');
+		spriteBG.loadGraphic('assets/images/Menu.jpg');
 		spriteBG.scale.x = Registre.CoefScale.x;
 		spriteBG.scale.y = Registre.CoefScale.y;
 		spriteBG.updateHitbox();
+		
 
-		spriteLogo = new FlxSprite(0, 0);
-		spriteLogo.loadGraphic('assets/images/logo.png');
-		spriteLogo.scale.y = spriteLogo.scale.x = Registre.CoefScale.x;
-		spriteLogo.x = 85 * Registre.CoefScale.x;
-		spriteLogo.y = 110 * Registre.CoefScale.y;
-		spriteLogo.alpha = .6;
-		spriteLogo.updateHitbox();
-
-		start = new FlxButton(120 * Registre.CoefScale.x, 835 * Registre.CoefScale.x,null,gotoPlay);
-		start.width = 480 * Registre.CoefScale.x*Registre.mobileZoom;
-		start.height = 60 * Registre.CoefScale.x*Registre.mobileZoom;
-		start.alpha = 0;
-		start.kill();
-
-		startText = new FlxText(120 * Registre.CoefScale.x, 835 * Registre.CoefScale.x, 480 * Registre.CoefScale.x,"START"); // x, y, width
-		startText.setFormat("assets/data/zoinks.ttf", Std.int(60 * Registre.CoefScale.x), 0x000000, "center");
-		startText.alpha = .6;
-		startText.kill();
 
 		add(spriteBG);
-		add(spriteLogo);
-		add(start);
-		add(startText);
+
+		//FlxTween.circularMotion(spSpaceship, spPlanet.x+spPlanet.width/2, spPlanet.y+spPlanet.height/2, 600, 90, true, 100, true, { type:FlxTween.LOOPING } );
+		//FlxTween.angle(spSpaceship, 0, -1, 10, { type:FlxTween.LOOPING });
+		//tw  = FlxTween.tween(spSpaceship, { x:600, y:800 }, 2, { type:FlxTween.circularMotion(spSpaceship, 0, 1080,500,0,true,1,true)});
+		
+		
+
 
 		lvlButtonGroup = new FlxTypedGroup();
-		for (i in 0...24)
+		
+		// set lvl buttons
+		for (i in 0...Registre.lockedLevels.length)
 		{
-			var bt = new FlxButton((120+i%6*80)* Registre.CoefScale.x,(450+Math.floor(i/6)*80)* Registre.CoefScale.x,null,onBtClick.bind(i));
+			var bt = new FlxButton((1250+i%6*80)* Registre.CoefScale.x,(850+Math.floor(i/6)*80)* Registre.CoefScale.x,null,onBtClick.bind(i));
 			bt.loadGraphic('assets/images/button.png');
 			bt.scale.x = bt.scale.y = Registre.CoefScale.x;
 			bt.updateHitbox();
@@ -99,14 +85,9 @@ class MenuState extends FlxState
 		spriteBG.destroy();
 		spriteBG = null;
 
-		spriteLogo.destroy();
-		spriteLogo = null;
+		/*spriteLogo.destroy();
+		spriteLogo = null;*/
 
-		start.destroy();
-		start = null;
-
-		startText.destroy();
-		startText = null;
 
 		for (i in lvlButtonGroup)
 		{
@@ -120,26 +101,8 @@ class MenuState extends FlxState
 
 	private function onBtClick(i:Int):Void
 	{
-		Registre.level = i + 1;
-
-		for (j in 0...lvlButtonGroup.members.length)
-		{
-			if (j == i) lvlButtonGroup.members[j].loadGraphic('assets/images/button02.png');
-			else lvlButtonGroup.members[j].loadGraphic('assets/images/button.png');
-		}
-		if (Assets.exists("assets/data/lvl" + Registre.level + "zlib.tmx"))
-		{
-			start.revive();
-			startText.revive();
-			startText.text = "START";
-		}
-
-		else
-		{
-			start.kill();
-			startText.revive();
-			startText.text = "LOCKED";
-		}
+		Registre.level = i;
+		if (!Registre.lockedLevels[i])FlxG.switchState(new PlayState());
 	}
 
 	private function gotoPlay():Void

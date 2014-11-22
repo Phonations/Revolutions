@@ -3,6 +3,7 @@ package;
 import flixel.FlxBasic;
 import flixel.group.FlxSpriteGroup;
 import flixel.group.FlxTypedGroup;
+import flixel.text.FlxText;
 import openfl.geom.Point;
 import openfl.utils.Timer;
 import Std;
@@ -32,6 +33,7 @@ import flixel.addons.editors.tiled.TiledObject;
 import flixel.addons.editors.tiled.TiledObjectGroup;
 import flixel.addons.editors.tiled.TiledTile;
 import flixel.addons.editors.tiled.TiledTileSet;
+import flixel.ui.FlxBar;
 
 class PlayState extends FlxState
 {
@@ -40,6 +42,10 @@ class PlayState extends FlxState
 	private var spriteBG_stars : FlxSprite;
 	private var player : Spaceship;
 	private var planets : FlxSpriteGroup;
+	private var pauseSubState:PauseState;
+	private var fuelBar : FlxBar;
+	private var fuelText : FlxText;
+	private var textTween : FlxTween;
 
 
 	override public function create():Void
@@ -73,7 +79,7 @@ class PlayState extends FlxState
 		spriteBG_stars.updateHitbox();
 		spriteBG_stars.scrollFactor.set(.3,.3);
 		add(spriteBG_stars);
-
+		
 		// Setup environment
 		FlxG.debugger.visible = true;
 
@@ -81,18 +87,48 @@ class PlayState extends FlxState
 
 		Registre.level = 1;
 		//load level
-		loadLevel("assets/data/lvl" + Registre.level + ".tmx");
-		
+		loadLevel("assets/data/lvl" + Registre.level + ".tmx");		
 		cameraGame.follow(player);
+		
+		//fuelbar setup
+		fuelBar = new FlxBar(0, FlxG.height - 50, FlxBar.FILL_LEFT_TO_RIGHT, 700, 2, null, null, 0, 10);	
+		fuelBar.x = (FlxG.width-fuelBar.width) / 2;
+		fuelBar.createFilledBar(0xffff0000, 0xffffffff, false);
+		fuelBar.scrollFactor.set();
+		fuelText = new FlxText(FlxG.width/2-250 , FlxG.height - 100, 500, 'FUEL LEVEL');
+		fuelText.setFormat("assets/data/Capsuula.ttf", 25, FlxColor.WHITE, "center");
+		fuelText.scrollFactor.set();
+		
+		add(fuelText);
+		add(fuelBar);
+
+		
+		//setup pause state
+		pauseSubState = new PauseState();
 	}
 
-
+	override public function onFocusLost():Void
+	{
+		FlxTimer.manager.active = false;
+		FlxTween.manager.active = false;
+		/*if (!pauseSubState.exists)
+		{
+			pauseSubState = new PauseState();
+			openSubState(pauseSubState);
+		}*/
+		trace(pauseSubState.exists);
+		
+	}
+	
 	override public function destroy():Void
 	{
 		cameraGame = null;
 
 		spriteBG = FlxDestroyUtil.destroy(spriteBG);
 		spriteBG = null;
+		
+		pauseSubState=FlxDestroyUtil.destroy(pauseSubState);
+		pauseSubState = null;
 
 		super.destroy();
 	}
@@ -100,18 +136,26 @@ class PlayState extends FlxState
 	override public function update():Void
 	{
 		if (FlxG.keys.justPressed.ESCAPE)
-			flash.system.System.exit(0);
+		{		
+			FlxTimer.manager.active = false;
+			FlxTween.manager.active = false;
+			openSubState(pauseSubState);
+		}
 		
 		if (FlxG.keys.pressed.S || FlxG.keys.pressed.LEFT)
 			player.angle -= Registre.keyPressedAngleAcceleration;
+			
 		if (FlxG.keys.pressed.F || FlxG.keys.pressed.RIGHT)
 			player.angle += Registre.keyPressedAngleAcceleration;
+			
 		player.engine = FlxG.keys.pressed.UP || FlxG.keys.pressed.E || FlxG.mouse.pressed;
+		//update fuelbar
+		fuelBar.currentValue = player.fuel;
 		
-		//if (FlxG.mouse.po
-		//player.angle = FlxAngle.angleBetweenPoint(player, FlxG.mouse.getWorldPosition(), true);
-		
-		
+		if (player.fuel < 4)
+		{
+			fuelText.color = 0xff0000;
+		}
 		super.update();
 	}
 
