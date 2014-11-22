@@ -69,7 +69,7 @@ class PlayState extends FlxState
 
 		persistantSubState = new PauseState();
 		openPersistantBtn = new FlxButton(20, 20, null, onPersistantClick);
-		openPersistantBtn.loadGraphic("assets/images/pause.png");
+//		openPersistantBtn.loadGraphic("assets/images/pause.png");
 		openPersistantBtn.scale.x = openPersistantBtn.scale.y = .5;
 		openPersistantBtn.alpha = .6;
 		add(openPersistantBtn);
@@ -78,11 +78,11 @@ class PlayState extends FlxState
 
 		cameraGame.width = FlxG.width;
 		cameraGame.height = Std.int(FlxG.height);
-		cameraGame.setBounds(-Registre.LEVEL_SIZE.x, -Registre.LEVEL_SIZE.y, Registre.LEVEL_SIZE.x*4, Registre.LEVEL_SIZE.y*4, false);
+//		cameraGame.setBounds(-Registre.LEVEL_SIZE.x, -Registre.LEVEL_SIZE.y, Registre.LEVEL_SIZE.x*4, Registre.LEVEL_SIZE.y*4, false);
 		cameraGame.zoom = .25;
 		cameraGame.height = Std.int(Math.ceil(FlxG.height / cameraGame.getScale().y));
 		cameraGame.width = Std.int(Math.ceil(FlxG.width / cameraGame.getScale().x));
-		cameraGame.setBounds(-(cameraGame.width-Registre.LEVEL_SIZE.x)/2,-(cameraGame.height-Registre.LEVEL_SIZE.y)/2,cameraGame.width, cameraGame.height, false);
+//		cameraGame.setBounds(-(cameraGame.width-Registre.LEVEL_SIZE.x)/2,-(cameraGame.height-Registre.LEVEL_SIZE.y)/2,cameraGame.width, cameraGame.height, false);
 		//cameraGame.antialiasing = true;
 
 

@@ -7,13 +7,13 @@ import flixel.FlxG;
 
 class Spaceship extends FlxSprite
 {
-	
-	public function new(X:Float=0, Y:Float=0) 
+
+	public function new(X:Float=0, Y:Float=0)
 	{
 		super(X, Y);
-		loadGraphic("assets/images/vaisseau.png", true, 128, 128);		
+		loadGraphic("assets/images/Spaceship.png", true, 128, 128);		
 		setSize(width, height / 2);//only affect hitbox
 		/*animation.add('idle', [0, 1, 2, 3, 4, 5], 5);
 		animation.play('idle');*/
-	}	
+	}
 }
