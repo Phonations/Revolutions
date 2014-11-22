@@ -79,7 +79,7 @@ class PlayState extends FlxState
 		spriteBG_stars.scale.x = FlxG.width / 1920;
 		spriteBG_stars.scale.y = FlxG.height / 1080;
 		spriteBG_stars.updateHitbox();
-		spriteBG_stars.scrollFactor.set(.05,.05);
+		spriteBG_stars.scrollFactor.set(.3,.3);
 		add(spriteBG_stars);
 
 		// Setup pause state
@@ -110,6 +110,7 @@ class PlayState extends FlxState
 
 		player = new Spaceship(FlxG.width / 2, FlxG.height / 2);
 		add(player);
+		player.velocity.x = 50;
 		cameraGame.follow(player);
 	}
 
