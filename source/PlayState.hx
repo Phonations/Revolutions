@@ -120,9 +120,12 @@ class PlayState extends FlxState
 		add(player);
 		player.velocity.x = 50;
 		cameraGame.follow(player);
-		
+		Registre.level = 1;
 		//load level
-		loadLevel("assets/data/lvl"+Registre.level+".tmx");
+		planets = new FlxSpriteGroup();		
+		add(planets);
+		loadLevel("assets/data/lvl" + Registre.level + ".tmx");
+		
 	}
 
 
@@ -195,22 +198,23 @@ class PlayState extends FlxState
 	private function loadLevel(data:Dynamic):Void
 	{
 		var tiledLevel : TiledMap = new TiledMap(data);
-		var layer:TiledLayer;
-		
+		var layer:TiledLayer;		
 		
 		for (group in tiledLevel.objectGroups)
 		{
 			for (obj in group.objects)
 			{
-				switch(obj.type.toLowerCase())
+
+				
+				if (obj.type == 'player')
 				{
-					case "planet_type_1":	
-						
-					case "planet_type_1":
-						
-					case "planet_type_1":
-						
-				}				
+					player.x = obj.x;
+					player.y = obj.y;
+				}
+				else
+				{
+					planets.add(new Planet(obj.x, obj.y, obj.type));
+				}			
 				
 			}
 		}	

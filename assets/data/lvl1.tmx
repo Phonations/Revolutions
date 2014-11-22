@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="100" height="100" tilewidth="32" tileheight="32">
+ <tileset firstgid="1" name="Planete" tilewidth="512" tileheight="512">
+  <image source="../images/Planete.png" width="512" height="512"/>
+ </tileset>
+ <objectgroup name="Calque d'objets 1">
+  <object type="planet_type_1" gid="1" x="525" y="566"/>
+  <object type="planet_type_1" gid="1" x="142.424" y="2354.55"/>
+  <object type="planet_type_1" gid="1" x="1709.09" y="1875.76"/>
+  <object type="planet_type_1" gid="1" x="2163.64" y="912.121"/>
+  <object type="planet_type_1" gid="1" x="2427.27" y="2554.55"/>
+  <object type="planet_type_1" gid="1" x="1230.3" y="1545.45"/>
+ </objectgroup>
+</map>
