@@ -110,7 +110,7 @@ class PlayState extends FlxState
 
 		player = new Spaceship(FlxG.width / 2, FlxG.height / 2);
 		add(player);
-		player.velocity.x = 50;
+		//player.velocity.x = 50;
 		cameraGame.follow(player);
 	}
 
@@ -132,8 +132,6 @@ class PlayState extends FlxState
 		super.destroy();
 	}
 
-
-
 	override public function onFocusLost():Void
 	{
 		FlxTimer.manager.active = false;
@@ -148,19 +146,18 @@ class PlayState extends FlxState
 		persistantSubState.isPersistant = false;
 		openSubState(persistantSubState);
 	}
+	
+
 
 	override public function update():Void
 	{
-		player.angle = FlxAngle.angleBetweenMouse(player, true);
-		if (FlxG.mouse.justPressed)
-		{
-			player.engine = true;
-		}
+		if (FlxG.keys.justPressed.ESCAPE)
+			flash.system.System.exit(0);
 		
-		if (FlxG.mouse.justReleased)
-		{
-			player.engine = false;
-		}
+		trace(FlxG.mouse.x, FlxG.mouse.y, player.x, player.y);
+		player.angle = FlxAngle.angleBetweenPoint(player, FlxG.mouse.getWorldPosition(), true);
+		
+		player.engine = FlxG.mouse.pressed;
 		
 		super.update();
 	}

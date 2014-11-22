@@ -37,8 +37,8 @@ class Spaceship extends FlxSprite
 				fuel--;
 			}
 			
-			velocity.x -= k * Math.cos(180 / Math.PI * angle);
-			velocity.y -= k * Math.sin(180 / Math.PI *angle);
+			velocity.x += k * Math.cos(180 / Math.PI * angle);
+			velocity.y += k * Math.sin(180 / Math.PI *angle);
 		}
 		
 		if (!engine)
