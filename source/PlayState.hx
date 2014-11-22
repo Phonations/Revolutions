@@ -197,15 +197,12 @@ class PlayState extends FlxState
 	
 	private function loadLevel(data:Dynamic):Void
 	{
-		var tiledLevel : TiledMap = new TiledMap(data);
-		var layer:TiledLayer;		
+		var tiledLevel : TiledMap = new TiledMap(data);	
 		
 		for (group in tiledLevel.objectGroups)
 		{
 			for (obj in group.objects)
-			{
-
-				
+			{				
 				if (obj.type == 'player')
 				{
 					player.x = obj.x;
