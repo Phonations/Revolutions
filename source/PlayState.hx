@@ -3,6 +3,7 @@ package;
 import flixel.FlxBasic;
 import flixel.group.FlxSpriteGroup;
 import flixel.group.FlxTypedGroup;
+import flixel.text.FlxText;
 import openfl.geom.Point;
 import openfl.utils.Timer;
 import Std;
@@ -43,6 +44,7 @@ class PlayState extends FlxState
 	private var planets : FlxSpriteGroup;
 	private var pauseSubState:PauseState;
 	private var fuelBar : FlxBar;
+	private var fuelText : FlxText;
 
 
 	override public function create():Void
@@ -77,13 +79,6 @@ class PlayState extends FlxState
 		spriteBG_stars.scrollFactor.set(.3,.3);
 		add(spriteBG_stars);
 		
-		//fuelbar setup
-		fuelBar = new FlxBar(0, FlxG.height - 50, FlxBar.FILL_LEFT_TO_RIGHT, 700, 2, null, null, 0, 10);	
-		fuelBar.x = (FlxG.width-fuelBar.width) / 2;
-		fuelBar.createFilledBar(0xffff0000, 0xffffffff, false);
-		fuelBar.scrollFactor.set();
-		add(fuelBar);
-
 		// Setup environment
 		FlxG.debugger.visible = true;
 
@@ -93,6 +88,16 @@ class PlayState extends FlxState
 		//load level
 		loadLevel("assets/data/lvl" + Registre.level + ".tmx");		
 		cameraGame.follow(player);
+		
+		//fuelbar setup
+		fuelBar = new FlxBar(0, FlxG.height - 50, FlxBar.FILL_LEFT_TO_RIGHT, 700, 2, null, null, 0, 10);	
+		fuelBar.x = (FlxG.width-fuelBar.width) / 2;
+		fuelBar.createFilledBar(0xffff0000, 0xffffffff, false);
+		fuelBar.scrollFactor.set();
+		fuelText = new FlxText(0, 0, 500, 'FUEL LEVEL');
+		myText.setFormat("assets/font.ttf", 20, FlxColor.WHITE, "center");
+		add(fuelBar);
+
 		
 		//setup pause state
 		pauseSubState = new PauseState();

@@ -43,31 +43,15 @@ class MenuState extends FlxState
 		Registre.CoefScale = new FlxPoint(FlxG.width / 1920, FlxG.height / 1080);
 
 		spriteBG = new FlxSprite(0, 0);
-		spriteBG.loadGraphic('assets/images/BG.jpg');
+		spriteBG.loadGraphic('assets/images/Menu.jpg');
 		spriteBG.scale.x = Registre.CoefScale.x;
 		spriteBG.scale.y = Registre.CoefScale.y;
 		spriteBG.updateHitbox();
 		
-		spPlanet = new FlxSprite(-256, FlxG.height/4);
-		spPlanet.loadGraphic('assets/images/PlaneteGazeuse.png');
 
-		spSpaceship = new FlxSprite(0,200);
-		spSpaceship.loadGraphic('assets/images/Spaceship.png', 128, 90);
-		spSpaceship.scale.x = spSpaceship.scale.y = .5;
-		
-
-		/*spriteLogo = new FlxSprite(0, 0);
-		spriteLogo.loadGraphic('assets/images/logo.png');
-		spriteLogo.scale.y = spriteLogo.scale.x = Registre.CoefScale.x;
-		spriteLogo.x = 85 * Registre.CoefScale.x;
-		spriteLogo.y = 110 * Registre.CoefScale.y;
-		spriteLogo.alpha = .6;
-		spriteLogo.updateHitbox();*/
 
 		add(spriteBG);
-		add(spPlanet);
-		//add(spriteLogo);
-		//add(spSpaceship);
+
 		//FlxTween.circularMotion(spSpaceship, spPlanet.x+spPlanet.width/2, spPlanet.y+spPlanet.height/2, 600, 90, true, 100, true, { type:FlxTween.LOOPING } );
 		//FlxTween.angle(spSpaceship, 0, -1, 10, { type:FlxTween.LOOPING });
 		//tw  = FlxTween.tween(spSpaceship, { x:600, y:800 }, 2, { type:FlxTween.circularMotion(spSpaceship, 0, 1080,500,0,true,1,true)});
