@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="100" height="100" tilewidth="32" tileheight="32">
+ <tileset firstgid="1" name="PlaneteCreuse" tilewidth="512" tileheight="512">
+  <image source="../images/PlaneteCreuse.png" width="512" height="512"/>
+ </tileset>
+ <tileset firstgid="2" name="Spaceship" tilewidth="128" tileheight="90">
+  <image source="../images/Spaceship.png" width="128" height="180"/>
+ </tileset>
+ <tileset firstgid="4" name="PlaneteEnd" tilewidth="256" tileheight="256">
+  <image source="../images/PlaneteEnd.png" width="256" height="256"/>
+ </tileset>
+ <tileset firstgid="5" name="PlaneteStart" tilewidth="256" tileheight="256">
+  <image source="../images/PlaneteStart.png" width="256" height="256"/>
+ </tileset>
+ <tileset firstgid="6" name="PlaneteTellurique" tilewidth="128" tileheight="128">
+  <image source="../images/PlaneteTellurique.png" width="128" height="128"/>
+ </tileset>
+ <tileset firstgid="7" name="PlaneteGazeuse" tilewidth="1024" tileheight="1024">
+  <image source="../images/PlaneteGazeuse.png" width="1024" height="1024"/>
+ </tileset>
+ <tileset firstgid="8" name="gabari-ecran" tilewidth="1920" tileheight="1080">
+  <image source="../../../../../../../GAMEJAM/RevolutionS/maquettage/gabari-ecran.png" width="1920" height="1080"/>
+ </tileset>
+ <objectgroup name="Calque d'objets 1">
+  <object gid="2" x="1525.29" y="608.7"/>
+  <object gid="5" x="1544" y="888"/>
+  <object gid="8" x="2588.33" y="2766.45"/>
+  <object gid="4" x="76" y="3084"/>
+  <object gid="1" x="2472" y="1452"/>
+  <object gid="1" x="352" y="1176"/>
+  <object gid="6" x="1591" y="1232"/>
+  <object gid="6" x="2032" y="2192"/>
+  <object gid="6" x="1264" y="1512"/>
+  <object gid="6" x="1584" y="268"/>
+  <object gid="7" x="477.091" y="2788.61"/>
+  <object gid="6" x="-56" y="2060"/>
+  <object gid="1" x="1736" y="3424"/>
+ </objectgroup>
+</map>
