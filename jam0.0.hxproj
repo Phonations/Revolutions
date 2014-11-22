@@ -1,0 +1,63 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<project version="2">
+  <!-- Output SWF options -->
+  <output>
+    <movie outputType="Application" />
+    <movie input="" />
+    <movie path="Project.xml" />
+    <movie fps="60" />
+    <movie width="1280" />
+    <movie height="800" />
+    <movie version="3" />
+    <movie minorVersion="0" />
+    <movie platform="NME" />
+    <movie background="C2F8FF" />
+  </output>
+  <!-- Other classes to be compiled into your SWF -->
+  <classpaths>
+    <class path="C:\Users\peripherique\flixel-tools\flixel\3,3,5" />
+    <class path="C:\Users\peripherique\flixel-tools\lime\1,0,1" />
+    <class path="C:\Users\peripherique\flixel-tools\openfl\2,0,1" />
+    <class path="C:\Users\peripherique\flixel-tools\flixel-addons\1,1,0" />
+    <class path="source" />
+    <class path="C:\Users\peripherique\flixel-tools\openfl\2,0,1\backends\native" />
+    <class path="export\windows\neko\haxe" />
+  </classpaths>
+  <!-- Build options -->
+  <build>
+    <option directives="flixel-addons=1.1.0&#xA;openfl=2.0.1&#xA;flixel=3.3.5&#xA;lime=1.0.1&#xA;FLX_NO_GAMEPAD&#xA;tools=1.5.7&#xA;NAPE_NO_INLINE&#xA;FLX_NO_DEBUG&#xA;lime_native&#xA;no-compilation&#xA;native&#xA;FLX_NO_TOUCH&#xA;openfl-native&#xA;display&#xA;FLX_RENDER_TILE&#xA;windows&#xA;desktop" />
+    <option flashStrict="False" />
+    <option noInlineOnDebug="False" />
+    <option mainClass="ApplicationMain" />
+    <option enabledebug="False" />
+    <option additional="--no-output&#xA;--remap flash:openfl&#xA;#--macro keep(&quot;Main&quot;)" />
+  </build>
+  <!-- haxelib libraries -->
+  <haxelib>
+    <!-- example: <library name="..." /> -->
+  </haxelib>
+  <!-- Class files to compile (other referenced classes will automatically be included) -->
+  <compileTargets>
+    <compile path="source\GameClass.hx" />
+  </compileTargets>
+  <!-- Assets to embed into the output SWF -->
+  <library>
+    <!-- example: <asset path="..." id="..." update="..." glyphs="..." mode="..." place="..." sharepoint="..." /> -->
+  </library>
+  <!-- Paths to exclude from the Project Explorer tree -->
+  <hiddenPaths>
+    <hidden path="obj" />
+  </hiddenPaths>
+  <!-- Executed before build -->
+  <preBuildCommand />
+  <!-- Executed after build -->
+  <postBuildCommand alwaysRun="False" />
+  <!-- Other project options -->
+  <options>
+    <option showHiddenPaths="False" />
+    <option testMovie="Custom" />
+    <option testMovieCommand="" />
+  </options>
+  <!-- Plugin storage -->
+  <storage />
+</project>
