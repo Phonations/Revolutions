@@ -1,6 +1,7 @@
 package;
 
 import flixel.FlxBasic;
+import flixel.group.FlxSpriteGroup;
 import flixel.group.FlxTypedGroup;
 import openfl.geom.Point;
 import openfl.utils.Timer;
@@ -25,6 +26,13 @@ import flixel.util.FlxAngle;
 import Spaceship;
 import flixel.util.FlxAngle;
 
+import flixel.addons.editors.tiled.TiledLayer;
+import flixel.addons.editors.tiled.TiledMap;
+import flixel.addons.editors.tiled.TiledObject;
+import flixel.addons.editors.tiled.TiledObjectGroup;
+import flixel.addons.editors.tiled.TiledTile;
+import flixel.addons.editors.tiled.TiledTileSet;
+
 class PlayState extends FlxState
 {
 	private var timerTap : Timer;
@@ -39,6 +47,7 @@ class PlayState extends FlxState
 	private var spriteBG : FlxSprite;
 	private var spriteBG_stars : FlxSprite;
 	private var player : Spaceship;
+	private var planets : FlxSpriteGroup;
 
 
 	override public function create():Void
@@ -48,7 +57,6 @@ class PlayState extends FlxState
 		super.create();
 
 		// Setup camera
-
 		FlxG.cameras.bgColor = 0xC2F8FF;
 
 		cameraGame = new FlxCamera(0, 0, FlxG.width, FlxG.height);
@@ -106,11 +114,10 @@ class PlayState extends FlxState
 
 		FlxG.autoPause = false;
 
-		// Add spaceship
-
-		player = new Spaceship(FlxG.width / 2, FlxG.height / 2);
-		add(player);
-		//player.velocity.x = 50;
+		Registre.level = 1;
+		//load level
+		loadLevel("assets/data/lvl" + Registre.level + ".tmx");
+		
 		cameraGame.follow(player);
 	}
 
@@ -180,5 +187,36 @@ class PlayState extends FlxState
 		persistantSubState = new PauseState();
 		persistantSubState.isPersistant = false;
 		openSubState(persistantSubState);
+	}
+	
+	private function loadLevel(data:Dynamic):Void
+	{
+		var tiledLevel : TiledMap = new TiledMap(data);	
+		
+		
+		// Add spaceship
+		player = new Spaceship(FlxG.width / 2, FlxG.height / 2);
+		add(player);
+		player.velocity.x = 50;
+		
+		//add planets		
+		planets = new FlxSpriteGroup();		
+		add(planets);
+		for (group in tiledLevel.objectGroups)
+		{
+			for (obj in group.objects)
+			{				
+				if (obj.type == 'player')
+				{
+					player.x = obj.x;
+					player.y = obj.y;
+				}
+				else
+				{
+					planets.add(new Planet(obj.x, obj.y, obj.type, obj.custom.mass));
+				}			
+				
+			}
+		}	
 	}
 }
