@@ -46,13 +46,13 @@ class MenuState extends FlxState
 		Registre.CoefScale = new FlxPoint(FlxG.width / 1920, FlxG.height / 1080);
 
 		spriteBG = new FlxSprite(0, 0);
-//		spriteBG.loadGraphic('assets/images/BG.png');
+		spriteBG.loadGraphic('assets/images/BG.png');
 		spriteBG.scale.x = Registre.CoefScale.x;
 		spriteBG.scale.y = Registre.CoefScale.y;
 		spriteBG.updateHitbox();
 
 		spriteLogo = new FlxSprite(0, 0);
-//		spriteLogo.loadGraphic('assets/images/logo.png');
+		spriteLogo.loadGraphic('assets/images/logo.png');
 		spriteLogo.scale.y = spriteLogo.scale.x = Registre.CoefScale.x;
 		spriteLogo.x = 85 * Registre.CoefScale.x;
 		spriteLogo.y = 110 * Registre.CoefScale.y;
@@ -66,7 +66,7 @@ class MenuState extends FlxState
 		start.kill();
 
 		startText = new FlxText(120 * Registre.CoefScale.x, 835 * Registre.CoefScale.x, 480 * Registre.CoefScale.x,"START"); // x, y, width
-//		startText.setFormat("assets/data/Lato-Lig.ttf", Std.int(60 * Registre.CoefScale.x), 0x000000, "center");
+		startText.setFormat("assets/data/zoinks.ttf", Std.int(60 * Registre.CoefScale.x), 0x000000, "center");
 		startText.alpha = .6;
 		startText.kill();
 
