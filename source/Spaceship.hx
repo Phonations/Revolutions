@@ -12,7 +12,7 @@ class Spaceship extends FlxSprite
 	public function new(X:Float=0, Y:Float=0)
 	{
 		super(X, Y);
-		loadGraphic("assets/images/Spaceship.png", true, 128, 128);
+		loadGraphic("assets/images/Spaceship.png", true, 175, 128);
 		//		setSize(width, height / 2);//only affect hitbox
 		trace(width, height);
 		animation.add('idle', [0], 0);
