@@ -36,13 +36,8 @@ class PauseState extends FlxSubState
 		super.create();
 		closeBtn = new FlxButton(20, 20, null, gotoGame);
 //		closeBtn.loadGraphic("assets/images/play.png");
-		closeBtn.scale.x = closeBtn.scale.y = .5;
 
-		menuText = new FlxText(FlxG.width/2-100 * Registre.CoefScale.x, FlxG.height/2, 200 * Registre.CoefScale.x,"MENU"); // x, y, width
-		//menuText.setFormat("assets/data/Lato-Lig.ttf", Std.int(60 * Registre.CoefScale.x), 0xffffff, "center");
-		menuText.alpha = .6;
-
-		menuBtn = new FlxButton(menuText.x, menuText.y, null, gotoMenu);
+		menuBtn = new FlxButton(500,500, null, gotoMenu);
 		menuBtn.height =60 * Registre.CoefScale.x;
 		menuBtn.width = 200 * Registre.CoefScale.x;
 

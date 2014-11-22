@@ -32,6 +32,7 @@ import flixel.addons.editors.tiled.TiledObject;
 import flixel.addons.editors.tiled.TiledObjectGroup;
 import flixel.addons.editors.tiled.TiledTile;
 import flixel.addons.editors.tiled.TiledTileSet;
+import flixel.ui.FlxBar;
 
 class PlayState extends FlxState
 {
@@ -41,6 +42,7 @@ class PlayState extends FlxState
 	private var player : Spaceship;
 	private var planets : FlxSpriteGroup;
 	private var pauseSubState:PauseState;
+	private var fuelBar : FlxBar;
 
 
 	override public function create():Void
@@ -74,6 +76,13 @@ class PlayState extends FlxState
 		spriteBG_stars.updateHitbox();
 		spriteBG_stars.scrollFactor.set(.3,.3);
 		add(spriteBG_stars);
+		
+		//fuelbar setup
+		fuelBar = new FlxBar(0, FlxG.height - 50, FlxBar.FILL_LEFT_TO_RIGHT, 700, 2, null, null, 0, 10);	
+		fuelBar.x = (FlxG.width-fuelBar.width) / 2;
+		fuelBar.createFilledBar(0xffff0000, 0xffffffff, false);
+		fuelBar.scrollFactor.set();
+		add(fuelBar);
 
 		// Setup environment
 		FlxG.debugger.visible = true;
@@ -130,11 +139,7 @@ class PlayState extends FlxState
 		if (FlxG.keys.pressed.F || FlxG.keys.pressed.RIGHT)
 			player.angle += Registre.keyPressedAngleAcceleration;
 		player.engine = FlxG.keys.pressed.UP || FlxG.keys.pressed.E || FlxG.mouse.pressed;
-		
-		//if (FlxG.mouse.po
-		//player.angle = FlxAngle.angleBetweenPoint(player, FlxG.mouse.getWorldPosition(), true);
-		
-		
+		fuelBar.currentValue = player.fuel;
 		super.update();
 	}
 

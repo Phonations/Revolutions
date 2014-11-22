@@ -10,7 +10,7 @@ class Spaceship extends FlxSprite
 {
 
 	public var engine : Bool;
-	private var fuel : Int;
+	public var fuel : Int;
 	private var fuelCoolDown : Int;
 
 	public function new(X:Float=0, Y:Float=0)
