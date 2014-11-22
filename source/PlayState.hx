@@ -151,7 +151,17 @@ class PlayState extends FlxState
 	override public function update():Void
 	{
 		player.angle = FlxAngle.angleBetweenMouse(player, true);
-
+		if (FlxG.mouse.justPressed)
+		{
+			player.engine = true;
+			trace('pressed');
+		}
+		
+		if (FlxG.mouse.justReleased)
+		{
+			player.engine = false;
+		}
+		
 		super.update();
 	}
 

@@ -26,6 +26,11 @@ class Spaceship extends FlxSprite
 		{
 			animation.play('gaz');
 		}
+		
+		if (!engine)
+		{
+			animation.play('idle');
+		}
 		super.update();
 	}
 	
