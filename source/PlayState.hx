@@ -42,6 +42,7 @@ class PlayState extends FlxState
 	public var cameraGame : FlxCamera;
 	private var mouseOrientationX :Int;
 	private var spriteBG : FlxSprite;
+	private var spriteBG_stars : FlxSprite;
 	private var player : Spaceship;
 
 
@@ -69,7 +70,7 @@ class PlayState extends FlxState
 		cameraGame.antialiasing = true;
 
 		// setup background
-
+		
 		spriteBG = new FlxSprite(0, 0);
 		spriteBG.loadGraphic('assets/images/BG.jpg');
 		spriteBG.scale.x = FlxG.width / 1920;
@@ -77,6 +78,14 @@ class PlayState extends FlxState
 		spriteBG.updateHitbox();
 		spriteBG.scrollFactor.set();
 		add(spriteBG);
+		
+		spriteBG_stars = new FlxSprite(0, 0);
+		spriteBG_stars.loadGraphic('assets/images/BG_Stars.png');
+		spriteBG_stars.scale.x = FlxG.width / 1920;
+		spriteBG_stars.scale.y = FlxG.height / 1080;
+		spriteBG_stars.updateHitbox();
+		spriteBG_stars.scrollFactor.set(.5,.5);
+		add(spriteBG_stars);
 
 		// Setup pause state
 
@@ -115,7 +124,7 @@ class PlayState extends FlxState
 
 		player = new Spaceship(FlxG.width / 2, FlxG.height / 2);
 		add(player);
-		//cameraGame.follow(player);
+		cameraGame.follow(player);
 	}
 
 
