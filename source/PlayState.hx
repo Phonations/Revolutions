@@ -38,7 +38,7 @@ class PlayState extends FlxState
 	private var drag : Bool;
 	private var persistantSubState:PauseState;
 	private var openPersistantBtn:FlxButton;
-	public var cameraUI : FlxCamera;
+//	public var cameraUI : FlxCamera;
 	public var cameraGame : FlxCamera;
 	private var mouseOrientationX :Int;
 	private var spriteBG : FlxSprite;
@@ -51,40 +51,43 @@ class PlayState extends FlxState
 
 		super.create();
 
+		// Setup camera
+
 		FlxG.cameras.bgColor = 0xC2F8FF;
 
 		cameraGame = new FlxCamera(0, 0, FlxG.width, FlxG.height);
 		FlxG.cameras.add(cameraGame);
 
-		cameraUI = new FlxCamera(0, 0, FlxG.width, FlxG.height);
-		FlxG.cameras.add(cameraUI);
+//		cameraUI = new FlxCamera(0, 0, FlxG.width, FlxG.height);
+//		FlxG.cameras.add(cameraUI);
+
+//		cameraGame.zoom = .25;
+//		cameraGame.height = Std.int(Math.ceil(FlxG.height / cameraGame.getScale().y));
+//		cameraGame.width = Std.int(Math.ceil(FlxG.width / cameraGame.getScale().x));
+		cameraGame.width = FlxG.width;
+		cameraGame.height = FlxG.height;
+		cameraGame.antialiasing = true;
+
+		// setup background
 
 		spriteBG = new FlxSprite(0, 0);
 		spriteBG.loadGraphic('assets/images/BG.png');
 		spriteBG.scale.x = FlxG.width / 1920;
 		spriteBG.scale.y = FlxG.height / 1080;
-		spriteBG.updateHitbox();
-
 		add(spriteBG);
 
-		persistantSubState = new PauseState();
-		openPersistantBtn = new FlxButton(20, 20, null, onPersistantClick);
+		// Setup pause state
+
+//		persistantSubState = new PauseState();
+//		openPersistantBtn = new FlxButton(20, 20, null, onPersistantClick);
 //		openPersistantBtn.loadGraphic("assets/images/pause.png");
-		openPersistantBtn.scale.x = openPersistantBtn.scale.y = .5;
-		openPersistantBtn.alpha = .6;
-		add(openPersistantBtn);
+//		openPersistantBtn.scale.x = openPersistantBtn.scale.y = .5;
+//		openPersistantBtn.alpha = .6;
+//		add(openPersistantBtn);
 
-		openPersistantBtn.cameras = [cameraUI];
+//		openPersistantBtn.cameras = [cameraUI];
 
-		cameraGame.width = FlxG.width;
-		cameraGame.height = Std.int(FlxG.height);
-//		cameraGame.setBounds(-Registre.LEVEL_SIZE.x, -Registre.LEVEL_SIZE.y, Registre.LEVEL_SIZE.x*4, Registre.LEVEL_SIZE.y*4, false);
-		cameraGame.zoom = .25;
-		cameraGame.height = Std.int(Math.ceil(FlxG.height / cameraGame.getScale().y));
-		cameraGame.width = Std.int(Math.ceil(FlxG.width / cameraGame.getScale().x));
-//		cameraGame.setBounds(-(cameraGame.width-Registre.LEVEL_SIZE.x)/2,-(cameraGame.height-Registre.LEVEL_SIZE.y)/2,cameraGame.width, cameraGame.height, false);
-		//cameraGame.antialiasing = true;
-
+		// Setup mouse and touch
 
 		mousePrev = new FlxPoint(0, 0);
 		mouseInitWorld = new FlxPoint(0, 0);
@@ -93,22 +96,30 @@ class PlayState extends FlxState
 		centerPrev = new FlxPoint(0, 0);
 		distPrev = 0;
 
-		FlxG.debugger.visible = true;
-
-		FlxG.autoPause = false;
-
 		timerTap = new Timer(1000, 0);
+
 		tap = false;
 		pinch = false;
 		scroll = false;
 		drag = false;
 		mouseOrientationX = 0;
+
+		// Setup environment
+		FlxG.debugger.visible = true;
+
+		FlxG.autoPause = false;
+
+		// Add spaceship
+
+		player = new Spaceship(FlxG.width / 2, FlxG.height / 2);
+		add(player);
+		cameraGame.follow(player);
 	}
 
 
 	override public function destroy():Void
 	{
-		cameraUI = null;
+//		cameraUI = null;
 		cameraGame = null;
 
 		openPersistantBtn=FlxDestroyUtil.destroy(openPersistantBtn);
@@ -142,7 +153,7 @@ class PlayState extends FlxState
 
 	override public function update():Void
 	{
-		if (!openPersistantBtn.alive && !persistantSubState.exists)openPersistantBtn.revive();
+//		if (!openPersistantBtn.alive && !persistantSubState.exists)openPersistantBtn.revive();
 		#if mobile
 		for (touch in FlxG.touches.list)
 		{
