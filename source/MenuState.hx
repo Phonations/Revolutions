@@ -66,15 +66,18 @@ class MenuState extends FlxState
 
 		add(spriteBG);
 		add(spPlanet);
+		//add(spriteLogo);
 		//add(spSpaceship);
 		//FlxTween.circularMotion(spSpaceship, spPlanet.x+spPlanet.width/2, spPlanet.y+spPlanet.height/2, 600, 90, true, 100, true, { type:FlxTween.LOOPING } );
 		//FlxTween.angle(spSpaceship, 0, -1, 10, { type:FlxTween.LOOPING });
 		//tw  = FlxTween.tween(spSpaceship, { x:600, y:800 }, 2, { type:FlxTween.circularMotion(spSpaceship, 0, 1080,500,0,true,1,true)});
 		
-		//add(spriteLogo);
+		
 
 
 		lvlButtonGroup = new FlxTypedGroup();
+		
+		// set lvl buttons
 		for (i in 0...Registre.lockedLevels.length)
 		{
 			var bt = new FlxButton((1250+i%6*80)* Registre.CoefScale.x,(850+Math.floor(i/6)*80)* Registre.CoefScale.x,null,onBtClick.bind(i));

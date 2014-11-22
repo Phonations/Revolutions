@@ -40,6 +40,7 @@ class PlayState extends FlxState
 	private var spriteBG_stars : FlxSprite;
 	private var player : Spaceship;
 	private var planets : FlxSpriteGroup;
+	private var pauseSubState:PauseState;
 
 
 	override public function create():Void
@@ -81,18 +82,35 @@ class PlayState extends FlxState
 
 		Registre.level = 1;
 		//load level
-		loadLevel("assets/data/lvl" + Registre.level + ".tmx");
-		
+		loadLevel("assets/data/lvl" + Registre.level + ".tmx");		
 		cameraGame.follow(player);
+		
+		//setup pause state
+		pauseSubState = new PauseState();
 	}
 
-
+	override public function onFocusLost():Void
+	{
+		FlxTimer.manager.active = false;
+		FlxTween.manager.active = false;
+		/*if (!pauseSubState.exists)
+		{
+			pauseSubState = new PauseState();
+			openSubState(pauseSubState);
+		}*/
+		trace(pauseSubState.exists);
+		
+	}
+	
 	override public function destroy():Void
 	{
 		cameraGame = null;
 
 		spriteBG = FlxDestroyUtil.destroy(spriteBG);
 		spriteBG = null;
+		
+		pauseSubState=FlxDestroyUtil.destroy(pauseSubState);
+		pauseSubState = null;
 
 		super.destroy();
 	}
@@ -100,7 +118,12 @@ class PlayState extends FlxState
 	override public function update():Void
 	{
 		if (FlxG.keys.justPressed.ESCAPE)
-			flash.system.System.exit(0);
+		{
+		
+			FlxTimer.manager.active = false;
+			FlxTween.manager.active = false;
+		openSubState(pauseSubState);
+		}
 		
 		if (FlxG.keys.pressed.S || FlxG.keys.pressed.LEFT)
 			player.angle -= Registre.keyPressedAngleAcceleration;
