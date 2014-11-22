@@ -35,14 +35,6 @@ import flixel.addons.editors.tiled.TiledTileSet;
 
 class PlayState extends FlxState
 {
-	private var timerTap : Timer;
-	private var tap : Bool;
-	private var pinch : Bool;
-	private var scroll : Bool;
-	private var drag : Bool;
-	private var persistantSubState:PauseState;
-	private var openPersistantBtn:FlxButton;
-//	public var cameraUI : FlxCamera;
 	public var cameraGame : FlxCamera;
 	private var spriteBG : FlxSprite;
 	private var spriteBG_stars : FlxSprite;
@@ -52,8 +44,6 @@ class PlayState extends FlxState
 
 	override public function create():Void
 	{
-		//Registre.BGExt= new LevelManager("assets/data/lvl"+Registre.level+"zlib.tmx");
-
 		super.create();
 
 		// Setup camera
@@ -62,12 +52,6 @@ class PlayState extends FlxState
 		cameraGame = new FlxCamera(0, 0, FlxG.width, FlxG.height);
 		FlxG.cameras.add(cameraGame);
 
-//		cameraUI = new FlxCamera(0, 0, FlxG.width, FlxG.height);
-//		FlxG.cameras.add(cameraUI);
-
-//		cameraGame.zoom = .25;
-//		cameraGame.height = Std.int(Math.ceil(FlxG.height / cameraGame.getScale().y));
-//		cameraGame.width = Std.int(Math.ceil(FlxG.width / cameraGame.getScale().x));
 		cameraGame.width = FlxG.width;
 		cameraGame.height = FlxG.height;
 		cameraGame.antialiasing = true;
@@ -90,25 +74,6 @@ class PlayState extends FlxState
 		spriteBG_stars.scrollFactor.set(.3,.3);
 		add(spriteBG_stars);
 
-		// Setup pause state
-
-//		persistantSubState = new PauseState();
-//		openPersistantBtn = new FlxButton(20, 20, null, onPersistantClick);
-//		openPersistantBtn.loadGraphic("assets/images/pause.png");
-//		openPersistantBtn.scale.x = openPersistantBtn.scale.y = .5;
-//		openPersistantBtn.alpha = .6;
-//		add(openPersistantBtn);
-
-//		openPersistantBtn.cameras = [cameraUI];
-
-		// Setup mouse and touch
-		timerTap = new Timer(1000, 0);
-
-		tap = false;
-		pinch = false;
-		scroll = false;
-		drag = false;
-
 		// Setup environment
 		FlxG.debugger.visible = true;
 
@@ -124,71 +89,32 @@ class PlayState extends FlxState
 
 	override public function destroy():Void
 	{
-//		cameraUI = null;
 		cameraGame = null;
 
-		openPersistantBtn=FlxDestroyUtil.destroy(openPersistantBtn);
-		openPersistantBtn = null;
-
-		spriteBG=FlxDestroyUtil.destroy(spriteBG);
+		spriteBG = FlxDestroyUtil.destroy(spriteBG);
 		spriteBG = null;
-
-		persistantSubState=FlxDestroyUtil.destroy(persistantSubState);
-		persistantSubState = null;
 
 		super.destroy();
 	}
-
-	override public function onFocusLost():Void
-	{
-		FlxTimer.manager.active = false;
-		FlxTween.manager.active = false;
-		openPersistantBtn.kill();
-		if (persistantSubState.exists)
-		{
-			persistantSubState.destroy();
-			persistantSubState = null;
-		}
-		persistantSubState = new PauseState();
-		persistantSubState.isPersistant = false;
-		openSubState(persistantSubState);
-	}
-	
-
 
 	override public function update():Void
 	{
 		if (FlxG.keys.justPressed.ESCAPE)
 			flash.system.System.exit(0);
 		
-		if (FlxG.keys.pressed.LEFT)
+		if (FlxG.keys.pressed.S || FlxG.keys.pressed.LEFT)
 			player.angle -= Registre.keyPressedAngleAcceleration;
-		if (FlxG.keys.pressed.RIGHT)
+		if (FlxG.keys.pressed.F || FlxG.keys.pressed.RIGHT)
 			player.angle += Registre.keyPressedAngleAcceleration;
-		player.engine = FlxG.keys.pressed.UP || FlxG.mouse.pressed;
+		player.engine = FlxG.keys.pressed.UP || FlxG.keys.pressed.E || FlxG.mouse.pressed;
 		
+		//if (FlxG.mouse.po
 		//player.angle = FlxAngle.angleBetweenPoint(player, FlxG.mouse.getWorldPosition(), true);
 		
 		
 		super.update();
 	}
 
-	private function onPersistantClick():Void
-	{
-		//Registre.BGExt.pauseTimer();
-		FlxTimer.manager.active = false;
-		FlxTween.manager.active = false;
-		openPersistantBtn.kill();
-		if (persistantSubState.exists)
-		{
-			persistantSubState.destroy();
-			persistantSubState = null;
-		}
-		persistantSubState = new PauseState();
-		persistantSubState.isPersistant = false;
-		openSubState(persistantSubState);
-	}
-	
 	private function loadLevel(data:Dynamic):Void
 	{
 		var tiledLevel : TiledMap = new TiledMap(data);	
