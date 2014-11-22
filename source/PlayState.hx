@@ -22,6 +22,7 @@ import flixel.ui.FlxButton;
 import flixel.util.FlxTimer;
 import flixel.util.FlxDestroyUtil;
 import Spaceship;
+import flixel.util.FlxAngle;
 
 class PlayState extends FlxState
 {
@@ -86,7 +87,7 @@ class PlayState extends FlxState
 		spriteBG_stars.updateHitbox();
 		spriteBG_stars.scrollFactor.set(.5,.5);
 		add(spriteBG_stars);
-
+FlxAngle.
 		// Setup pause state
 
 //		persistantSubState = new PauseState();
@@ -114,7 +115,6 @@ class PlayState extends FlxState
 		scroll = false;
 		drag = false;
 		mouseOrientationX = 0;
-
 		// Setup environment
 		FlxG.debugger.visible = true;
 
