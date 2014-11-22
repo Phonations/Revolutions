@@ -42,14 +42,16 @@ class PlayState extends FlxNapeState
 	private var space : Space;
 	
 	private var floorShape : FlxNapeSprite;
-	var logCount:Int = 0;
+	private var pauseSubState:PauseState;
+	private var fuelBar : FlxBar;
+	private var fuelText : FlxText;
+	private var textTween : FlxTween;
 
 	override public function create():Void
 	{
 		super.create();
 
 		FlxG.debugger.visible = true;
-		FlxG.log.add(logCount++);
 
 		// Setup camera
 		FlxG.cameras.bgColor = 0xC2F8FF;
@@ -87,9 +89,7 @@ class PlayState extends FlxNapeState
 		Registre.level = 1;
 		
 		// Setup physics
-		FlxG.log.add(logCount++);
 		space = new Space(new Vec2(0, 0));
-		FlxG.log.add(logCount++);
 		
 		//load level
 		loadLevel("assets/data/lvl" + Registre.level + ".tmx");		
@@ -201,7 +201,6 @@ class PlayState extends FlxNapeState
 		
 		
 		// Add spaceship
-		FlxG.log.add(logCount++);
 		player = new Spaceship(FlxG.width / 2, FlxG.height / 2, space);
 		add(player);
 		player.velocity.x = 50;
