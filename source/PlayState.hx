@@ -3,7 +3,11 @@ package;
 import flixel.FlxBasic;
 import flixel.group.FlxSpriteGroup;
 import flixel.group.FlxTypedGroup;
+<<<<<<< HEAD
 import haxe.ds.Vector;
+=======
+import flixel.text.FlxText;
+>>>>>>> origin
 import openfl.geom.Point;
 import openfl.utils.Timer;
 import Std;
@@ -22,12 +26,22 @@ import flixel.ui.FlxButton;
 import Spaceship;
 import flixel.util.*;
 
+<<<<<<< HEAD
 import flixel.addons.editors.tiled.*;
 import flixel.addons.nape.*;
 import nape.space.*;
 import nape.geom.*;
 import nape.phys.*;
 import nape.shape.*;
+=======
+import flixel.addons.editors.tiled.TiledLayer;
+import flixel.addons.editors.tiled.TiledMap;
+import flixel.addons.editors.tiled.TiledObject;
+import flixel.addons.editors.tiled.TiledObjectGroup;
+import flixel.addons.editors.tiled.TiledTile;
+import flixel.addons.editors.tiled.TiledTileSet;
+import flixel.ui.FlxBar;
+>>>>>>> origin
 
 
 class PlayState extends FlxNapeState
@@ -37,10 +51,18 @@ class PlayState extends FlxNapeState
 	private var spriteBG_stars : FlxSprite;
 	private var player : Spaceship;
 	private var planets : FlxSpriteGroup;
+<<<<<<< HEAD
 	private var space : Space;
 	
 	private var floorShape : FlxNapeSprite;
 	var logCount:Int = 0;
+=======
+	private var pauseSubState:PauseState;
+	private var fuelBar : FlxBar;
+	private var fuelText : FlxText;
+	private var textTween : FlxTween;
+
+>>>>>>> origin
 
 	override public function create():Void
 	{
@@ -76,7 +98,7 @@ class PlayState extends FlxNapeState
 		spriteBG_stars.updateHitbox();
 		spriteBG_stars.scrollFactor.set(.3,.3);
 		add(spriteBG_stars);
-
+		
 		// Setup environment
 		FlxG.debugger.visible = true;
 
@@ -90,40 +112,48 @@ class PlayState extends FlxNapeState
 		FlxG.log.add(logCount++);
 		
 		//load level
-		loadLevel("assets/data/lvl" + Registre.level + ".tmx");
-		
-		//FlxG.log.add("a");
-		//var sprite1:FlxNapeSprite = new FlxNapeSprite(600, 300, null, false, true);
-		//FlxG.log.add("b");
-		//sprite1.makeGraphic(50, 100, FlxColor.GREEN);
-		//FlxG.log.add("c");
-		//sprite1.createRectangularBody(50, 100, BodyType.DYNAMIC);
-		//sprite1.body.space = space;
-		//FlxG.log.add("d");
-		//add(sprite1);
-		//FlxG.log.add("f");
-		//FlxG.log.add("a");
-		//
-		//var sprite2:FlxNapeSprite = new FlxNapeSprite(600, 600, null, false, true);
-		//FlxG.log.add("b");
-		//sprite2.makeGraphic(400, 100, FlxColor.GREEN);
-		//FlxG.log.add("c");
-		//sprite2.createRectangularBody(400, 100, BodyType.STATIC);
-		//sprite2.body.space = space;
-		//FlxG.log.add("d");
-		//add(sprite2);
-		//FlxG.log.add("f");
-		
+		loadLevel("assets/data/lvl" + Registre.level + ".tmx");		
 		cameraGame.follow(player);
+		
+		//fuelbar setup
+		fuelBar = new FlxBar(0, FlxG.height - 50, FlxBar.FILL_LEFT_TO_RIGHT, 700, 2, null, null, 0, 10);	
+		fuelBar.x = (FlxG.width-fuelBar.width) / 2;
+		fuelBar.createFilledBar(0xffff0000, 0xffffffff, false);
+		fuelBar.scrollFactor.set();
+		fuelText = new FlxText(FlxG.width/2-250 , FlxG.height - 100, 500, 'FUEL LEVEL');
+		fuelText.setFormat("assets/data/Capsuula.ttf", 25, FlxColor.WHITE, "center");
+		fuelText.scrollFactor.set();
+		
+		add(fuelText);
+		add(fuelBar);
+
+		
+		//setup pause state
+		pauseSubState = new PauseState();
 	}
 
-
+	override public function onFocusLost():Void
+	{
+		FlxTimer.manager.active = false;
+		FlxTween.manager.active = false;
+		/*if (!pauseSubState.exists)
+		{
+			pauseSubState = new PauseState();
+			openSubState(pauseSubState);
+		}*/
+		trace(pauseSubState.exists);
+		
+	}
+	
 	override public function destroy():Void
 	{
 		cameraGame = null;
 
 		spriteBG = FlxDestroyUtil.destroy(spriteBG);
 		spriteBG = null;
+		
+		pauseSubState=FlxDestroyUtil.destroy(pauseSubState);
+		pauseSubState = null;
 
 		super.destroy();
 	}
@@ -131,9 +161,14 @@ class PlayState extends FlxNapeState
 	override public function update():Void
 	{
 		if (FlxG.keys.justPressed.ESCAPE)
-			flash.system.System.exit(0);
+		{		
+			FlxTimer.manager.active = false;
+			FlxTween.manager.active = false;
+			openSubState(pauseSubState);
+		}
 		
 		if (FlxG.keys.pressed.S || FlxG.keys.pressed.LEFT)
+
 		{
 			if (player.body.angularVel > -Registre.maxVelocityRotation)
 				player.body.angularVel -= Registre.keyPressedAngleAcceleration;
@@ -144,8 +179,7 @@ class PlayState extends FlxNapeState
 				player.body.angularVel += Registre.keyPressedAngleAcceleration;
 		}
 		player.engine = FlxG.keys.pressed.UP || FlxG.keys.pressed.E || FlxG.mouse.pressed;
-		
-		
+
 		var gravity:Vec2 = new Vec2(0, 0);
 		if (player.engine)
 		{
@@ -169,6 +203,14 @@ class PlayState extends FlxNapeState
 		space.gravity = gravity;
 		
 		space.step(1 / 30);
+
+		//update fuelbar
+		fuelBar.currentValue = player.fuel;
+		
+		if (player.fuel < 4)
+		{
+			fuelText.color = 0xff0000;
+		}
 
 		super.update();
 	}

@@ -17,7 +17,7 @@ class Spaceship extends FlxNapeSprite
 {
 
 	public var engine : Bool;
-	private var fuel : Int;
+	public var fuel : Int;
 	private var fuelCoolDown : Int;
 
 	public function new(X:Float, Y:Float, space:Space)
