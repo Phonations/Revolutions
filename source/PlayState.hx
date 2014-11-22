@@ -79,7 +79,7 @@ class PlayState extends FlxState
 		spriteBG_stars.scale.x = FlxG.width / 1920;
 		spriteBG_stars.scale.y = FlxG.height / 1080;
 		spriteBG_stars.updateHitbox();
-		spriteBG_stars.scrollFactor.set(.5,.5);
+		spriteBG_stars.scrollFactor.set(.05,.05);
 		add(spriteBG_stars);
 
 		// Setup pause state

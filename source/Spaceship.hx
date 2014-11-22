@@ -9,13 +9,14 @@ class Spaceship extends FlxSprite
 {
 
 	public var engine : Bool;
-	public var fuel : Int;
+	private var fuel : Int;
 	private var fuelCoolDown : Int;
+	static private var k = 10;
+	
 	public function new(X:Float=0, Y:Float=0)
 	{
 		super(X, Y);
 		loadGraphic("assets/images/Spaceship.png", true, 175, 128);
-		//		setSize(width, height / 2);//only affect hitbox
 		trace(width, height);
 		animation.add('idle', [0], 0);
 		animation.add('gaz', [1],0);
@@ -30,11 +31,14 @@ class Spaceship extends FlxSprite
 		{
 			animation.play('gaz');
 			fuelCoolDown++;
+			
 			if (fuelCoolDown % 60 == 0)
 			{
 				fuel--;
-				trace(fuel);
-			}			
+			}
+			
+			velocity.x -= k * Math.cos(180 / Math.PI * angle);
+			velocity.y -= k * Math.sin(180 / Math.PI *angle);
 		}
 		
 		if (!engine)
