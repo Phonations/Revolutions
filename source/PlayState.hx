@@ -154,7 +154,6 @@ class PlayState extends FlxState
 		if (FlxG.mouse.justPressed)
 		{
 			player.engine = true;
-			trace('pressed');
 		}
 		
 		if (FlxG.mouse.justReleased)

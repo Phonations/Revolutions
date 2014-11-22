@@ -9,6 +9,7 @@ class Spaceship extends FlxSprite
 {
 
 	public var engine : Bool;
+	public var fuel : Int;
 	public function new(X:Float=0, Y:Float=0)
 	{
 		super(X, Y);
@@ -19,12 +20,14 @@ class Spaceship extends FlxSprite
 		animation.add('gaz', [1],0);
 		animation.play('idle');
 		engine = false;
+		fuel = 10;
 	}
 	override public function update () : Void
 	{
 		if (engine)
 		{
 			animation.play('gaz');
+			fuel--;
 		}
 		
 		if (!engine)
