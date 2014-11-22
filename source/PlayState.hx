@@ -210,7 +210,7 @@ class PlayState extends FlxState
 				}
 				else
 				{
-					planets.add(new Planet(obj.x, obj.y, obj.type));
+					planets.add(new Planet(obj.x, obj.y, obj.type, obj.custom.mass));
 				}			
 				
 			}

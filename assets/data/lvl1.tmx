@@ -3,6 +3,9 @@
  <tileset firstgid="1" name="Planete" tilewidth="512" tileheight="512">
   <image source="../images/Planete.png" width="512" height="512"/>
  </tileset>
+ <tileset firstgid="2" name="Spaceship" tilewidth="175" tileheight="128">
+  <image source="../images/Spaceship.png" width="175" height="256"/>
+ </tileset>
  <objectgroup name="Calque d'objets 1">
   <object type="planet_type_1" gid="1" x="525" y="566"/>
   <object type="planet_type_1" gid="1" x="142.424" y="2354.55"/>
@@ -10,5 +13,10 @@
   <object type="planet_type_1" gid="1" x="2163.64" y="912.121"/>
   <object type="planet_type_1" gid="1" x="2427.27" y="2554.55"/>
   <object type="planet_type_1" gid="1" x="1230.3" y="1545.45"/>
+  <object type="player" gid="2" x="209.97" y="1282.18">
+   <properties>
+    <property name="mass" value="0"/>
+   </properties>
+  </object>
  </objectgroup>
 </map>
