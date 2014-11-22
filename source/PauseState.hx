@@ -34,12 +34,14 @@ class PauseState extends FlxSubState
 	override public function create():Void
 	{
 		super.create();
-		closeBtn = new FlxButton(20, 20, null, gotoGame);
-//		closeBtn.loadGraphic("assets/images/play.png");
+		closeBtn = new FlxButton(20, 300, null, gotoGame);
+		closeBtn.loadGraphic("assets/images/Resume.png", false, 165, 44);
+		closeBtn.x = (FlxG.width - closeBtn.width) / 2;
 
-		menuBtn = new FlxButton(500,500, null, gotoMenu);
-		menuBtn.height =60 * Registre.CoefScale.x;
-		menuBtn.width = 200 * Registre.CoefScale.x;
+		menuBtn = new FlxButton(500, 500, null, gotoMenu);
+		menuBtn.loadGraphic("assets/images/Home.png", false, 120, 44);
+		menuBtn.x = (FlxG.width - menuBtn.width) / 2;
+		
 
 		BGSprite = new FlxSprite(0, 0);
 		BGSprite.makeGraphic(FlxG.width, FlxG.height,FlxColor.BLACK);

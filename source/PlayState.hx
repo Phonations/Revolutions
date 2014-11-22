@@ -3,6 +3,7 @@ package;
 import flixel.FlxBasic;
 import flixel.group.FlxSpriteGroup;
 import flixel.group.FlxTypedGroup;
+import flixel.system.FlxSound;
 import flixel.text.FlxText;
 import openfl.geom.Point;
 import openfl.utils.Timer;
@@ -91,7 +92,7 @@ class PlayState extends FlxState
 		cameraGame.follow(player);
 		
 		//fuelbar setup
-		fuelBar = new FlxBar(0, FlxG.height - 50, FlxBar.FILL_LEFT_TO_RIGHT, 700, 2, null, null, 0, 10);	
+		fuelBar = new FlxBar(0, FlxG.height - 50, FlxBar.FILL_LEFT_TO_RIGHT, 700, 2, null, null, 0, 600);	
 		fuelBar.x = (FlxG.width-fuelBar.width) / 2;
 		fuelBar.createFilledBar(0xffff0000, 0xffffffff, false);
 		fuelBar.scrollFactor.set();
@@ -106,14 +107,31 @@ class PlayState extends FlxState
 		pauseSubState = new PauseState();
 		
 		//launch music
-		//FlxG.sound.playMusic("musique_beat");
-		//FlxG.sound.playMusic("musique_butterfly");
-		/*FlxG.sound.playMusic("musique_dreamworks");
-		FlxG.sound.playMusic("musique_glass");
-		FlxG.sound.playMusic("musique_glassy");
-		FlxG.sound.playMusic("musique_harpolodic");
-		FlxG.sound.playMusic("musique_split");
-		FlxG.sound.playMusic("musique_split_tabular");	*/	
+		/*FlxG.sound.playMusic("assets/sound/musique_beat.ogg");
+		FlxG.sound.playMusic("assets/sound/musique_butterfly.ogg");
+		FlxG.sound.playMusic("assets/sound/musique_glass.ogg");
+		FlxG.sound.playMusic("assets/sound/musique_glassy.ogg");
+		FlxG.sound.playMusic("assets/sound/musique_tabular.ogg");
+		FlxG.sound.playMusic("assets/sound/musique_split_tabular.ogg");
+		FlxG.sound.playMusic("assets/sound/musique_harpolodic.ogg");*/
+		
+		var s1 : FlxSound =FlxG.sound.load("assets/sound/musique_beat.ogg",1,true);
+			var s2 : FlxSound=FlxG.sound.load("assets/sound/musique_butterfly.ogg",1,true);
+			var s3 : FlxSound=FlxG.sound.load("assets/sound/musique_glass.ogg",1,true);
+			var s4 : FlxSound=FlxG.sound.load("assets/sound/musique_glassy.ogg",1,true);
+			var s5 : FlxSound=FlxG.sound.load("assets/sound/musique_tabular.ogg",1,true);
+			var s6 : FlxSound=FlxG.sound.load("assets/sound/musique_split_tabular.ogg",1,true);
+			var s7 : FlxSound = FlxG.sound.load("assets/sound/musique_harpolodic.ogg", 1, true);
+			
+			s1.play();
+			s2.play();
+			s3.play();
+			s4.play();
+			s5.play();
+			s6.play();
+			s7.play();
+
+
 	}
 
 	override public function onFocusLost():Void
@@ -161,7 +179,7 @@ class PlayState extends FlxState
 		//update fuelbar
 		fuelBar.currentValue = player.fuel;
 		
-		if (player.fuel < 4)
+		if (player.fuel < 240)
 		{
 			fuelText.color = 0xff0000;
 		}
