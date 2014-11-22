@@ -10,6 +10,7 @@ class Spaceship extends FlxSprite
 
 	public var engine : Bool;
 	public var fuel : Int;
+	private var fuelCoolDown : Int;
 	public function new(X:Float=0, Y:Float=0)
 	{
 		super(X, Y);
@@ -21,19 +22,27 @@ class Spaceship extends FlxSprite
 		animation.play('idle');
 		engine = false;
 		fuel = 10;
+		fuelCoolDown = 0;
 	}
 	override public function update () : Void
 	{
 		if (engine)
 		{
 			animation.play('gaz');
-			fuel--;
+			fuelCoolDown++;
+			if (fuelCoolDown % 60 == 0)
+			{
+				fuel--;
+				trace(fuel);
+			}			
 		}
 		
 		if (!engine)
 		{
 			animation.play('idle');
-		}
+			fuelCoolDown = 0;
+		}	
+		
 		super.update();
 	}
 	
