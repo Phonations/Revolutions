@@ -3,11 +3,8 @@ package;
 import flixel.FlxBasic;
 import flixel.group.FlxSpriteGroup;
 import flixel.group.FlxTypedGroup;
-<<<<<<< HEAD
 import haxe.ds.Vector;
-=======
 import flixel.text.FlxText;
->>>>>>> origin
 import openfl.geom.Point;
 import openfl.utils.Timer;
 import Std;
@@ -25,23 +22,13 @@ import flixel.util.FlxColor;
 import flixel.ui.FlxButton;
 import Spaceship;
 import flixel.util.*;
-
-<<<<<<< HEAD
 import flixel.addons.editors.tiled.*;
 import flixel.addons.nape.*;
 import nape.space.*;
 import nape.geom.*;
 import nape.phys.*;
 import nape.shape.*;
-=======
-import flixel.addons.editors.tiled.TiledLayer;
-import flixel.addons.editors.tiled.TiledMap;
-import flixel.addons.editors.tiled.TiledObject;
-import flixel.addons.editors.tiled.TiledObjectGroup;
-import flixel.addons.editors.tiled.TiledTile;
-import flixel.addons.editors.tiled.TiledTileSet;
 import flixel.ui.FlxBar;
->>>>>>> origin
 
 
 class PlayState extends FlxNapeState
@@ -51,18 +38,11 @@ class PlayState extends FlxNapeState
 	private var spriteBG_stars : FlxSprite;
 	private var player : Spaceship;
 	private var planets : FlxSpriteGroup;
-<<<<<<< HEAD
+
 	private var space : Space;
 	
 	private var floorShape : FlxNapeSprite;
 	var logCount:Int = 0;
-=======
-	private var pauseSubState:PauseState;
-	private var fuelBar : FlxBar;
-	private var fuelText : FlxText;
-	private var textTween : FlxTween;
-
->>>>>>> origin
 
 	override public function create():Void
 	{
