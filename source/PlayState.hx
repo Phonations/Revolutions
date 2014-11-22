@@ -10,8 +10,6 @@ import Std;
 import flixel.FlxG;
 import flixel.FlxState;
 import flixel.tile.FlxTilemap;
-import flixel.util.FlxMath;
-import flixel.util.FlxPoint;
 import flixel.*;
 import CameraMove;
 import flixel.system.frontEnds.DebuggerFrontEnd;
@@ -21,20 +19,18 @@ import  flixel.tweens.FlxEase;
 import flixel.FlxSprite;
 import flixel.util.FlxColor;
 import flixel.ui.FlxButton;
-import flixel.util.FlxTimer;
-import flixel.util.FlxDestroyUtil;
-import flixel.util.FlxAngle;
 import Spaceship;
-import flixel.util.FlxAngle;
+import flixel.util.*;
 
 import flixel.addons.editors.tiled.*;
-import flixel.addons.nape.FlxNapeSprite;
+import flixel.addons.nape.*;
 import nape.space.*;
 import nape.geom.*;
 import nape.phys.*;
 import nape.shape.*;
 
-class PlayState extends FlxState
+
+class PlayState extends FlxNapeState
 {
 	public var cameraGame : FlxCamera;
 	private var spriteBG : FlxSprite;
@@ -44,10 +40,14 @@ class PlayState extends FlxState
 	private var space : Space;
 	
 	private var floorShape : FlxNapeSprite;
+	var logCount:Int = 0;
 
 	override public function create():Void
 	{
 		super.create();
+
+		FlxG.debugger.visible = true;
+		FlxG.log.add(logCount++);
 
 		// Setup camera
 		FlxG.cameras.bgColor = 0xC2F8FF;
@@ -83,46 +83,38 @@ class PlayState extends FlxState
 		FlxG.autoPause = false;
 
 		Registre.level = 1;
+		
+		// Setup physics
+		FlxG.log.add(logCount++);
+		space = new Space(new Vec2(0, 0));
+		FlxG.log.add(logCount++);
+		
 		//load level
 		loadLevel("assets/data/lvl" + Registre.level + ".tmx");
 		
+		//FlxG.log.add("a");
+		//var sprite1:FlxNapeSprite = new FlxNapeSprite(600, 300, null, false, true);
+		//FlxG.log.add("b");
+		//sprite1.makeGraphic(50, 100, FlxColor.GREEN);
+		//FlxG.log.add("c");
+		//sprite1.createRectangularBody(50, 100, BodyType.DYNAMIC);
+		//sprite1.body.space = space;
+		//FlxG.log.add("d");
+		//add(sprite1);
+		//FlxG.log.add("f");
+		//FlxG.log.add("a");
+		//
+		//var sprite2:FlxNapeSprite = new FlxNapeSprite(600, 600, null, false, true);
+		//FlxG.log.add("b");
+		//sprite2.makeGraphic(400, 100, FlxColor.GREEN);
+		//FlxG.log.add("c");
+		//sprite2.createRectangularBody(400, 100, BodyType.STATIC);
+		//sprite2.body.space = space;
+		//FlxG.log.add("d");
+		//add(sprite2);
+		//FlxG.log.add("f");
+		
 		cameraGame.follow(player);
-		
-		// Setup physic
-		
-		var gravity:Vec2 = new Vec2(0, 600);
-		space = new Space(gravity);
-		
-		var width:Int = 500;
-		var height:Int = 200;
-		var rectangleVertices:Array<Vec2> = Polygon.rect(50, 500, width, height);
-		var boxVertices      :Array<Vec2> = Polygon.box(width, height);
-		// ^ equivalent to Polygon.rect(-width/2, -height/2, width, height);
-		var pentagonVertices :Array<Vec2> = Polygon.regular(width, height, 5);
-		
-		var floorBody:Body = new Body(BodyType.STATIC);
-		floorShape.makeGraphic(width, height);
-		
-		floorShape.body = floorBody;
-		
-		var circle:Circle = new Circle(10); // local position argument is optional.
-		var anotherCircle:Circle = new Circle(10, new Vec2(5, 0));
-		
-		var circleBody:Body = new Body(); // Implicit BodyType.DYNAMIC
-		circleBody.position.setxy(FlxG.width/2, FlxG.height/2);
-		// or circleBody.position = new Vec2(stage.width/2, stage.height/2);
-		// or circleBody.position.x = stage.width/2; etc.
-		circleBody.velocity.setxy(0, 1000);
-		
-		var circleShape:Circle = new Circle(50);
-		
-		// Set individual values
-		circleShape.material.elasticity = 1;
-		circleShape.material.density = 4;
-
-		// Assign a totally different Material, can use this style to share Materials.
-		circleShape.material = Material.rubber();
-		circleShape.body = circleBody;
 	}
 
 
@@ -142,15 +134,42 @@ class PlayState extends FlxState
 			flash.system.System.exit(0);
 		
 		if (FlxG.keys.pressed.S || FlxG.keys.pressed.LEFT)
-			player.angle -= Registre.keyPressedAngleAcceleration;
+		{
+			if (player.body.angularVel > -Registre.maxVelocityRotation)
+				player.body.angularVel -= Registre.keyPressedAngleAcceleration;
+		}
 		if (FlxG.keys.pressed.F || FlxG.keys.pressed.RIGHT)
-			player.angle += Registre.keyPressedAngleAcceleration;
+		{
+			if (player.body.angularVel < Registre.maxVelocityRotation)
+				player.body.angularVel += Registre.keyPressedAngleAcceleration;
+		}
 		player.engine = FlxG.keys.pressed.UP || FlxG.keys.pressed.E || FlxG.mouse.pressed;
 		
-		//if (FlxG.mouse.po
-		//player.angle = FlxAngle.angleBetweenPoint(player, FlxG.mouse.getWorldPosition(), true);
 		
+		var gravity:Vec2 = new Vec2(0, 0);
+		if (player.engine)
+		{
+			var k:Float = 1000;
+			gravity.x += k * Math.cos(FlxAngle.asRadians(player.angle));
+			gravity.y += k * Math.sin(FlxAngle.asRadians(player.angle));
+		}
 		
+		for (p in planets.members)
+		{
+			var d:Float = p.getMidpoint().distanceTo(player.getMidpoint());
+			var g = 10000000 / d / d;
+			var angle = FlxAngle.angleBetweenPoint(player, p.getMidpoint(), false);
+			gravity.x += g * Math.cos(angle);
+			gravity.y += g * Math.sin(angle);
+		}
+
+		FlxG.log.add(gravity);
+		FlxG.log.add(player.angularVelocity);
+		FlxG.log.add(player.angle);
+		space.gravity = gravity;
+		
+		space.step(1 / 30);
+
 		super.update();
 	}
 
@@ -160,7 +179,8 @@ class PlayState extends FlxState
 		
 		
 		// Add spaceship
-		player = new Spaceship(FlxG.width / 2, FlxG.height / 2);
+		FlxG.log.add(logCount++);
+		player = new Spaceship(FlxG.width / 2, FlxG.height / 2, space);
 		add(player);
 		player.velocity.x = 50;
 		
@@ -178,7 +198,8 @@ class PlayState extends FlxState
 				}
 				else
 				{
-					planets.add(new Planet(obj.x, obj.y, obj.type, obj.custom.mass));
+					FlxG.log.add(space.gravity);
+					planets.add(new Planet(obj.x, obj.y, obj.type, obj.custom.mass, space));
 				}			
 				
 			}

@@ -16,6 +16,7 @@ class Registre
 	
 	public static var saves:Array<FlxSave> = [];
 	
-	public static var keyPressedAngleAcceleration:Int = 2;
-	public static var engineAcceleration:Int = 50;
+	public static var keyPressedAngleAcceleration:Float = 0.1;
+	public static var maxVelocityRotation:Float = 2;
+	public static var engineAcceleration:Float = 1;
 }

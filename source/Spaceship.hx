@@ -6,17 +6,26 @@ import flixel.util.FlxPoint;
 import flixel.FlxG;
 import flixel.util.FlxAngle;
 
-class Spaceship extends FlxSprite
+import flixel.addons.nape.FlxNapeSprite;
+
+import nape.space.*;
+import nape.geom.*;
+import nape.phys.*;
+import nape.shape.*;
+
+class Spaceship extends FlxNapeSprite
 {
 
 	public var engine : Bool;
 	private var fuel : Int;
 	private var fuelCoolDown : Int;
 
-	public function new(X:Float=0, Y:Float=0)
+	public function new(X:Float, Y:Float, space:Space)
 	{
-		super(X, Y);
+		super(X, Y, null, false, true);
 		loadGraphic("assets/images/Spaceship.png", true, 128, 90);
+		createRectangularBody(128, 90, BodyType.DYNAMIC);
+		body.space = space;
 		trace(width, height);
 		animation.add('idle', [0], 0);
 		animation.add('gaz', [1],0);
@@ -36,10 +45,6 @@ class Spaceship extends FlxSprite
 			{
 				fuel--;
 			}
-			
-			var k:Int = Registre.engineAcceleration;
-			velocity.x += k * Math.cos(FlxAngle.asRadians(angle));
-			velocity.y += k * Math.sin(FlxAngle.asRadians(angle));
 		}
 		
 		if (!engine)
