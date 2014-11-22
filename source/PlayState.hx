@@ -1,6 +1,7 @@
 package;
 
 import flixel.FlxBasic;
+import flixel.group.FlxSpriteGroup;
 import flixel.group.FlxTypedGroup;
 import openfl.geom.Point;
 import openfl.utils.Timer;
@@ -25,6 +26,13 @@ import flixel.util.FlxAngle;
 import Spaceship;
 import flixel.util.FlxAngle;
 
+import flixel.addons.editors.tiled.TiledLayer;
+import flixel.addons.editors.tiled.TiledMap;
+import flixel.addons.editors.tiled.TiledObject;
+import flixel.addons.editors.tiled.TiledObjectGroup;
+import flixel.addons.editors.tiled.TiledTile;
+import flixel.addons.editors.tiled.TiledTileSet;
+
 class PlayState extends FlxState
 {
 	private var timerTap : Timer;
@@ -39,6 +47,7 @@ class PlayState extends FlxState
 	private var spriteBG : FlxSprite;
 	private var spriteBG_stars : FlxSprite;
 	private var player : Spaceship;
+	private var planets : FlxSpriteGroup;
 
 
 	override public function create():Void
@@ -48,7 +57,6 @@ class PlayState extends FlxState
 		super.create();
 
 		// Setup camera
-
 		FlxG.cameras.bgColor = 0xC2F8FF;
 
 		cameraGame = new FlxCamera(0, 0, FlxG.width, FlxG.height);
@@ -112,6 +120,9 @@ class PlayState extends FlxState
 		add(player);
 		player.velocity.x = 50;
 		cameraGame.follow(player);
+		
+		//load level
+		loadLevel("assets/data/lvl"+Registre.level+".tmx");
 	}
 
 
@@ -179,5 +190,29 @@ class PlayState extends FlxState
 		persistantSubState = new PauseState();
 		persistantSubState.isPersistant = false;
 		openSubState(persistantSubState);
+	}
+	
+	private function loadLevel(data:Dynamic):Void
+	{
+		var tiledLevel : TiledMap = new TiledMap(data);
+		var layer:TiledLayer;
+		
+		
+		for (group in tiledLevel.objectGroups)
+		{
+			for (obj in group.objects)
+			{
+				switch(obj.type.toLowerCase())
+				{
+					case "planet_type_1":	
+						
+					case "planet_type_1":
+						
+					case "planet_type_1":
+						
+				}				
+				
+			}
+		}	
 	}
 }
