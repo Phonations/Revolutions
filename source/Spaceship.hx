@@ -20,12 +20,13 @@ class Spaceship extends FlxSprite
 		animation.play('idle');
 		engine = false;
 	}
-	public function update () : Void
+	override public function update () : Void
 	{
 		if (engine)
 		{
 			animation.play('gaz');
 		}
+		super.update();
 	}
 	
 }
