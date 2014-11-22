@@ -158,7 +158,7 @@ class PlayState extends FlxState
 			player.angle--;
 		if (FlxG.keys.pressed.RIGHT)
 			player.angle++;
-		player.engine = FlxG.keys.pressed.UP || FlxG.mouse.pressed;
+		player.engine = FlxG.keys.pressed.UP;// || FlxG.mouse.pressed;
 		
 		//player.angle = FlxAngle.angleBetweenPoint(player, FlxG.mouse.getWorldPosition(), true);
 		
