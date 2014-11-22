@@ -101,10 +101,19 @@ class PlayState extends FlxState
 		
 		add(fuelText);
 		add(fuelBar);
-
 		
 		//setup pause state
 		pauseSubState = new PauseState();
+		
+		//launch music
+		//FlxG.sound.playMusic("musique_beat");
+		//FlxG.sound.playMusic("musique_butterfly");
+		/*FlxG.sound.playMusic("musique_dreamworks");
+		FlxG.sound.playMusic("musique_glass");
+		FlxG.sound.playMusic("musique_glassy");
+		FlxG.sound.playMusic("musique_harpolodic");
+		FlxG.sound.playMusic("musique_split");
+		FlxG.sound.playMusic("musique_split_tabular");	*/	
 	}
 
 	override public function onFocusLost():Void

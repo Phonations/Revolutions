@@ -36,8 +36,6 @@ class MenuState extends FlxState
 	{
 		super.create();
 
-		Registre.lockedLevels = [false,false];
-
 		FlxG.camera.antialiasing = true;
 
 		Registre.CoefScale = new FlxPoint(FlxG.width / 1920, FlxG.height / 1080);
@@ -62,18 +60,18 @@ class MenuState extends FlxState
 		lvlButtonGroup = new FlxTypedGroup();
 		
 		// set lvl buttons
-		for (i in 0...Registre.lockedLevels.length)
-		{
-			var bt = new FlxButton((1250+i%6*80)* Registre.CoefScale.x,(850+Math.floor(i/6)*80)* Registre.CoefScale.x,null,onBtClick.bind(i));
-			bt.loadGraphic('assets/images/button.png');
-			bt.scale.x = bt.scale.y = Registre.CoefScale.x;
-			bt.updateHitbox();
-
-			if (Registre.lockedLevels[i]) bt.alpha = .3;
-			else bt.alpha = .6;
-
-			lvlButtonGroup.add(bt);
-		}
+		var bt : FlxButton;
+		bt = new FlxButton(800,500,onBtClick.bind(0));
+		bt.loadGraphic('assets/images/Tutorial.png',false,150,44);
+		//bt.scale.x = bt.scale.y = Registre.CoefScale.x;
+		bt.updateHitbox();
+		lvlButtonGroup.add(bt);
+	
+		bt = new FlxButton(1000,500,null,onBtClick.bind(1));
+		bt.loadGraphic('assets/images/Challenge.png',false,190,60);
+		//bt.scale.x = bt.scale.y = Registre.CoefScale.x;
+		bt.updateHitbox();
+		lvlButtonGroup.add(bt);
 
 		add(lvlButtonGroup);
 		Registre.level = 1;
@@ -102,7 +100,7 @@ class MenuState extends FlxState
 	private function onBtClick(i:Int):Void
 	{
 		Registre.level = i;
-		if (!Registre.lockedLevels[i])FlxG.switchState(new PlayState());
+		gotoPlay();
 	}
 
 	private function gotoPlay():Void
