@@ -95,12 +95,13 @@ class PlayState extends FlxState
 		if (FlxG.keys.justPressed.ESCAPE)
 			flash.system.System.exit(0);
 		
-		if (FlxG.keys.pressed.LEFT)
+		if (FlxG.keys.pressed.S || FlxG.keys.pressed.LEFT)
 			player.angle -= Registre.keyPressedAngleAcceleration;
-		if (FlxG.keys.pressed.RIGHT)
+		if (FlxG.keys.pressed.F || FlxG.keys.pressed.RIGHT)
 			player.angle += Registre.keyPressedAngleAcceleration;
-		player.engine = FlxG.keys.pressed.UP || FlxG.mouse.pressed;
+		player.engine = FlxG.keys.pressed.UP || FlxG.keys.pressed.E || FlxG.mouse.pressed;
 		
+		//if (FlxG.mouse.po
 		//player.angle = FlxAngle.angleBetweenPoint(player, FlxG.mouse.getWorldPosition(), true);
 		
 		
