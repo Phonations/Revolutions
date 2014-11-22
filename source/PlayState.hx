@@ -45,6 +45,7 @@ class PlayState extends FlxState
 	private var pauseSubState:PauseState;
 	private var fuelBar : FlxBar;
 	private var fuelText : FlxText;
+	private var textTween : FlxTween;
 
 
 	override public function create():Void
@@ -94,8 +95,11 @@ class PlayState extends FlxState
 		fuelBar.x = (FlxG.width-fuelBar.width) / 2;
 		fuelBar.createFilledBar(0xffff0000, 0xffffffff, false);
 		fuelBar.scrollFactor.set();
-		fuelText = new FlxText(0, 0, 500, 'FUEL LEVEL');
-		myText.setFormat("assets/font.ttf", 20, FlxColor.WHITE, "center");
+		fuelText = new FlxText(FlxG.width/2-250 , FlxG.height - 100, 500, 'FUEL LEVEL');
+		fuelText.setFormat("assets/data/Capsuula.ttf", 25, FlxColor.WHITE, "center");
+		fuelText.scrollFactor.set();
+		
+		add(fuelText);
 		add(fuelBar);
 
 		
@@ -132,19 +136,26 @@ class PlayState extends FlxState
 	override public function update():Void
 	{
 		if (FlxG.keys.justPressed.ESCAPE)
-		{
-		
+		{		
 			FlxTimer.manager.active = false;
 			FlxTween.manager.active = false;
-		openSubState(pauseSubState);
+			openSubState(pauseSubState);
 		}
 		
 		if (FlxG.keys.pressed.S || FlxG.keys.pressed.LEFT)
 			player.angle -= Registre.keyPressedAngleAcceleration;
+			
 		if (FlxG.keys.pressed.F || FlxG.keys.pressed.RIGHT)
 			player.angle += Registre.keyPressedAngleAcceleration;
+			
 		player.engine = FlxG.keys.pressed.UP || FlxG.keys.pressed.E || FlxG.mouse.pressed;
+		//update fuelbar
 		fuelBar.currentValue = player.fuel;
+		
+		if (player.fuel < 4)
+		{
+			fuelText.color = 0xff0000;
+		}
 		super.update();
 	}
 
