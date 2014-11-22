@@ -122,7 +122,7 @@ class PlayState extends FlxState
 		cameraGame.follow(player);
 		
 		//load level
-		loadLevel("assets/data/lvl"+Registre.level+".tmx");
+		//loadLevel("assets/data/lvl"+Registre.level+".tmx");
 	}
 
 
@@ -202,7 +202,7 @@ class PlayState extends FlxState
 		{
 			for (obj in group.objects)
 			{
-				switch(obj.type.toLowerCase())
+				/*switch(obj.type.toLowerCase())
 				{
 					case "planet_type_1":	
 						
@@ -210,7 +210,7 @@ class PlayState extends FlxState
 						
 					case "planet_type_1":
 						
-				}				
+				}*/				
 				
 			}
 		}	
