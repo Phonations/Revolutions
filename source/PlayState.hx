@@ -71,7 +71,7 @@ class PlayState extends FlxState
 		// setup background
 
 		spriteBG = new FlxSprite(0, 0);
-		spriteBG.loadGraphic('assets/images/BG.png');
+		spriteBG.loadGraphic('assets/images/BG.jpg');
 		spriteBG.scale.x = FlxG.width / 1920;
 		spriteBG.scale.y = FlxG.height / 1080;
 		add(spriteBG);
