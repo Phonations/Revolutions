@@ -20,11 +20,18 @@ class Planet extends FlxNapeSprite
 
 		var size:Int = Math.ceil(radius);
 		loadGraphic("assets/images/" + type+".png");
+		
+		FlxG.log.add("planet");
 		FlxG.log.add(radius);
-		scale.x = radius / width;
-		scale.y = radius / height;
+//		scale.x = radius / width;
+//		scale.y = radius / height;
+		FlxG.log.add(scale.x);
+		FlxG.log.add(scale.y);
+		FlxG.log.add(width);
+		FlxG.log.add(height);
 		//makeGraphic(512, 512, FlxColor.CORAL);
-		createCircularBody(radius, BodyType.STATIC);
+	//	createCircularBody(radius, BodyType.STATIC);
+		createCircularBody(128, BodyType.STATIC);
 		setBodyMaterial(1, 0.2, 0.4, mass);
 		body.space = space;
 		updateHitbox();
