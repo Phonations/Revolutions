@@ -250,12 +250,11 @@ class PlayState extends FlxNapeState
 				{
 					player.x = obj.x;
 					player.y = obj.y;
+					player.angleAcceleration=Std.parseFloat(obj.custom.AngleAcceleration);
+					player.maxAngleVelocity=Std.parseFloat(obj.custom.MaxAngleVelocity);
+					player.engineAcceleration=Std.parseFloat(obj.custom.EngineAcceleration);
 					FlxG.log.add(obj.custom.AngleAcceleration);
-					FlxG.log.add(obj.custom.MaxAngleVelocity);
-					FlxG.log.add(obj.custom.EngineAcceleration);
-					player.angleAcceleration=Std.parseInt(obj.custom.AngleAcceleration);
-					player.maxAngleVelocity=Std.parseInt(obj.custom.MaxAngleVelocity);
-					player.engineAcceleration=Std.parseInt(obj.custom.EngineAcceleration);
+					FlxG.log.add(player.angleAcceleration);
 				}
 				else
 				{
