@@ -22,7 +22,7 @@ class WinState extends FlxSubState
 	// Some test sprite, showing that if the state is persistant (not destroyed after closing)
 	// then it will save it's position (and all other properties)
 	private var BGSprite:FlxSprite;
-	//private var winSprite : FlxSprite;
+	private var winSprite : FlxSprite;
 	private var startBtn:FlxButton;
 
 	// just a helper flag, showing if this substate is persistant or not
@@ -37,8 +37,12 @@ class WinState extends FlxSubState
 		startBtn.x = (FlxG.width-startBtn.width) / 2;
 		startBtn.y = (FlxG.width - startBtn.height) / 2;
 		
-		/*winSprite = new FlxSprite();
-		winSprite.loadGraphic('assets/images/Home.png');*/
+		winSprite = new FlxSprite(0,0);
+		winSprite.loadGraphic('assets/images/YouWin.png');
+		winSprite.x = (FlxG.width-loseSprite.width) / 2;
+		winSprite.y = (FlxG.height - winSprite.height) / 2;
+		winSprite.scale.set(.5,.5);
+		winSprite.scrollFactor.set();
 
 		BGSprite = new FlxSprite(0, 0);
 		BGSprite.makeGraphic(Std.int(3 / 4 * FlxG.width), Std.int(3 / 4 * FlxG.height), FlxColor.BLACK);
@@ -49,7 +53,7 @@ class WinState extends FlxSubState
 
 		add(BGSprite);
 		add(startBtn);
-		//add(winSprite);
+		add(winSprite);
 
 	}
 
