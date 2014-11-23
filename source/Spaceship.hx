@@ -19,28 +19,38 @@ class Spaceship extends FlxSprite
 		loadGraphic("assets/images/Spaceship.png", true, 128, 90);
 		trace(width, height);
 		animation.add('idle', [0], 0);
-		animation.add('gaz', [1],0);
+		animation.add('gaz', [1], 0);
+		animation.add('lowgaz', [1,0,0,1,1,0,1,1,1,0],15,true);
 		animation.play('idle');
 		engine = false;
-		fuel = 10;
+		fuel = 600;
 		fuelCoolDown = 0;
 	}
 	override public function update () : Void
 	{
-		if (engine)
+		if (engine && fuel>0)
 		{
 			animation.play('gaz');
+			
+			if (fuel < 240)
+			animation.play('lowgaz');
+			
 			fuelCoolDown++;
 			
-			if (fuelCoolDown % 60 == 0)
-			{
+		//	if (fuelCoolDown % 60 == 0)
+			//{
 				fuel--;
-			}
+		//	}
 			
 			var k:Int = Registre.engineAcceleration;
 			velocity.x += k * Math.cos(FlxAngle.asRadians(angle));
 			velocity.y += k * Math.sin(FlxAngle.asRadians(angle));
 		}
+		
+		if (fuel <= 0)
+		animation.play("idle");
+		
+		
 		
 		if (!engine)
 		{
