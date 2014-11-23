@@ -71,19 +71,33 @@
   <object type="player" gid="2" x="1245.29" y="1508.7">
    <properties>
     <property name="AngleAcceleration" value="0.2"/>
-    <property name="EngineAcceleration" value="180"/>
+    <property name="EngineAcceleration" value="190"/>
     <property name="G" value=""/>
     <property name="MaxAngleVelocity" value="2"/>
    </properties>
   </object>
-  <object type="planet" gid="4" x="1415" y="1308">
+  <object type="planet" gid="4" x="499" y="540">
    <properties>
-    <property name="mass" value="1"/>
+    <property name="mass" value="-10"/>
     <property name="rayon" value="128"/>
     <property name="type" value="Plaete5"/>
    </properties>
   </object>
-  <object type="planet" gid="4" x="2560.61" y="1339.39">
+  <object type="planet" gid="4" x="1356" y="1096">
+   <properties>
+    <property name="mass" value="-10"/>
+    <property name="rayon" value="128"/>
+    <property name="type" value="Plaete5"/>
+   </properties>
+  </object>
+  <object type="planet" gid="4" x="1228" y="2200">
+   <properties>
+    <property name="mass" value="-10"/>
+    <property name="rayon" value="128"/>
+    <property name="type" value="Plaete5"/>
+   </properties>
+  </object>
+  <object type="planet" gid="4" x="1872" y="2852">
    <properties>
     <property name="mass" value="-10"/>
     <property name="rayon" value="128"/>
