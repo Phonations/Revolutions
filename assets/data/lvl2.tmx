@@ -83,7 +83,7 @@
     <property name="type" value="Plaete5"/>
    </properties>
   </object>
-  <object type="planet" gid="4" x="424.242" y="1278.79">
+  <object type="planet" gid="4" x="2064" y="1288">
    <properties>
     <property name="mass" value="5"/>
     <property name="rayon" value="128"/>

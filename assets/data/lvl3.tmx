@@ -97,12 +97,5 @@
     <property name="type" value="Plaete5"/>
    </properties>
   </object>
-  <object type="planet" gid="4" x="2184" y="2324">
-   <properties>
-    <property name="mass" value="10"/>
-    <property name="rayon" value="128"/>
-    <property name="type" value="Plaete5"/>
-   </properties>
-  </object>
  </objectgroup>
 </map>
