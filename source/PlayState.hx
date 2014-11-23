@@ -34,7 +34,6 @@ import flixel.ui.FlxBar;
 
 class PlayState extends FlxNapeState
 {
-	public var cameraUI : FlxCamera;
 	public var cameraGame : FlxCamera;
 	private var spriteBG : FlxSprite;
 	private var spriteBG_stars : FlxSprite;
@@ -64,13 +63,6 @@ class PlayState extends FlxNapeState
 		cameraGame = new FlxCamera(0, 0, FlxG.width, FlxG.height);
 		FlxG.cameras.add(cameraGame);
 
-		cameraUI = new FlxCamera(0, 0, FlxG.width, FlxG.height);
-		FlxG.cameras.add(cameraUI);
-		
-		cameraUI.width = FlxG.width;
-		cameraUI.height = FlxG.height;
-		cameraUI.antialiasing = true;
-		
 		cameraGame.width = FlxG.width;
 		cameraGame.height = FlxG.height;
 		cameraGame.antialiasing = true;
@@ -83,7 +75,7 @@ class PlayState extends FlxNapeState
 		spriteBG.scale.y = FlxG.height / 1080;
 		spriteBG.updateHitbox();
 		spriteBG.scrollFactor.set();
-		
+		add(spriteBG);
 		
 		spriteBG_stars = new FlxSprite(0, 0);
 		spriteBG_stars.loadGraphic('assets/images/BG_Stars.png');
@@ -91,7 +83,7 @@ class PlayState extends FlxNapeState
 		spriteBG_stars.scale.y = FlxG.height / 1080;
 		spriteBG_stars.updateHitbox();
 		spriteBG_stars.scrollFactor.set(.3,.3);
-		
+		add(spriteBG_stars);
 		
 		// Setup environment
 		FlxG.debugger.visible = true;
@@ -112,9 +104,10 @@ class PlayState extends FlxNapeState
 		fuelBar.scrollFactor.set();
 		fuelText = new FlxText(FlxG.width/2-250 , FlxG.height - 100, 500, 'FUEL LEVEL');
 		fuelText.setFormat("assets/data/Capsuula.ttf", 25, FlxColor.WHITE, "center");
-		fuelText.scrollFactor.set();		
+		fuelText.scrollFactor.set();
 		
-		
+		add(fuelText);
+		add(fuelBar);
 		
 		//setup pause state
 		pauseSubState = new PauseState();
@@ -152,21 +145,8 @@ class PlayState extends FlxNapeState
 			tutoSubState = new TutoState();
 			openSubState(tutoSubState);
 		}
-		
-		//camera gestion
-		spriteBG.cameras = [cameraGame];
-		spriteBG_stars.cameras = [cameraGame];
-		fuelBar.cameras = [cameraUI];
-		fuelText.cameras = [cameraUI];
-		planets.cameras = [cameraGame];
-		player.cameras = [cameraGame];
-		
-		add(spriteBG);
-		add(spriteBG_stars);
-		add(planets);
-		add(player);
-		add(fuelText);
-		add(fuelBar);
+
+
 	}
 
 	override public function onFocusLost():Void
@@ -184,7 +164,7 @@ class PlayState extends FlxNapeState
 	
 	override public function destroy():Void
 	{
-		FlxG.camera = null;
+		cameraGame = null;
 
 		spriteBG = FlxDestroyUtil.destroy(spriteBG);
 		spriteBG = null;
@@ -197,18 +177,6 @@ class PlayState extends FlxNapeState
 
 	override public function update():Void
 	{
-		//camera zoom
-		if (FlxG.mouse.wheel != 0)
-		{
-			cameraGame.zoom += FlxG.mouse.wheel / 30;
-			if (cameraGame.zoom >= 1)cameraGame.zoom = 1;
-			if (cameraGame.zoom <= .5) cameraGame.zoom = .6;
-			cameraGame.height = Std.int(Std.int(FlxG.height / cameraGame.getScale().y));
-			cameraGame.width = Std.int(Std.int(FlxG.width /  cameraGame.getScale().x));
-			trace(cameraGame.width );
-			//spriteBG.scale.set(1 / FlxG.camera.zoom, 1 / FlxG.camera.zoom);
-		}
-		
 		if (FlxG.keys.justPressed.ESCAPE)
 		{		
 			FlxTimer.manager.active = false;
@@ -269,10 +237,12 @@ class PlayState extends FlxNapeState
 		
 		// Add spaceship
 		player = new Spaceship(FlxG.width / 2, FlxG.height / 2, space);
+		add(player);
 		player.velocity.x = 50;
 		
 		//add planets		
 		planets = new FlxSpriteGroup();		
+		add(planets);
 		for (group in tiledLevel.objectGroups)
 		{
 			for (obj in group.objects)
