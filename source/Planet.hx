@@ -12,10 +12,11 @@ import nape.shape.*;
 
 class Planet extends FlxNapeSprite
 {
-	
-	public function new(X:Float, Y:Float, type : String, mass : Float, space:Space)
+	public var type:String;
+	public function new(X:Float, Y:Float, _type : String, mass : Float, space:Space)
 	{
 		super(X, Y, null, false, true);
+		type = _type;
 		loadGraphic("assets/images/"+type+".png");
 		//makeGraphic(512, 512, FlxColor.CORAL);
 		createCircularBody(128, BodyType.STATIC);
