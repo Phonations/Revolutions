@@ -8,6 +8,6 @@
  </tileset>
  <objectgroup name="Calque d'objets 1">
   <object type="planet_type_1" gid="1" x="761.364" y="1426.61"/>
-  <object gid="2" x="214.788" y="1214.7"/>
+  <object type="player" gid="2" x="214.788" y="1214.7"/>
  </objectgroup>
 </map>

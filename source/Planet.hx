@@ -11,6 +11,6 @@ class Planet extends FlxSprite
 	public function new(X:Float=0, Y:Float=0, type : String, mass : String) 
 	{
 		super(X, Y);
-		loadGraphic("assets/images/PlaneteCreuse.png", true, 512, 512);
+		loadGraphic("assets/images/PlaneteEndAnime.png", true, 256, 256);
 	}		
 }
