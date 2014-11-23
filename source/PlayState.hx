@@ -44,6 +44,7 @@ class PlayState extends FlxState
 	private var player : Spaceship;
 	private var planets : FlxSpriteGroup;
 	private var pauseSubState:PauseState;
+	private var tutoSubState:TutoState;
 	private var fuelBar : FlxBar;
 	private var fuelText : FlxText;
 	private var textTween : FlxTween;
@@ -86,7 +87,6 @@ class PlayState extends FlxState
 
 		FlxG.autoPause = false;
 
-		Registre.level = 1;
 		//load level
 		loadLevel("assets/data/lvl" + Registre.level + ".tmx");		
 		cameraGame.follow(player);
@@ -116,20 +116,29 @@ class PlayState extends FlxState
 		FlxG.sound.playMusic("assets/sound/musique_harpolodic.ogg");*/
 		
 		var s1 : FlxSound =FlxG.sound.load("assets/sound/musique_beat.ogg",1,true);
-			var s2 : FlxSound=FlxG.sound.load("assets/sound/musique_butterfly.ogg",1,true);
-			var s3 : FlxSound=FlxG.sound.load("assets/sound/musique_glass.ogg",1,true);
-			var s4 : FlxSound=FlxG.sound.load("assets/sound/musique_glassy.ogg",1,true);
-			var s5 : FlxSound=FlxG.sound.load("assets/sound/musique_tabular.ogg",1,true);
-			var s6 : FlxSound=FlxG.sound.load("assets/sound/musique_split_tabular.ogg",1,true);
-			var s7 : FlxSound = FlxG.sound.load("assets/sound/musique_harpolodic.ogg", 1, true);
-			
-			s1.play();
-			s2.play();
-			s3.play();
-			s4.play();
-			s5.play();
-			s6.play();
-			s7.play();
+		var s2 : FlxSound=FlxG.sound.load("assets/sound/musique_butterfly.ogg",1,true);
+		var s3 : FlxSound=FlxG.sound.load("assets/sound/musique_glass.ogg",1,true);
+		var s4 : FlxSound=FlxG.sound.load("assets/sound/musique_glassy.ogg",1,true);
+		var s5 : FlxSound=FlxG.sound.load("assets/sound/musique_tabular.ogg",1,true);
+		var s6 : FlxSound=FlxG.sound.load("assets/sound/musique_split_tabular.ogg",1,true);
+		var s7 : FlxSound = FlxG.sound.load("assets/sound/musique_harpolodic.ogg", 1, true);
+		
+		s1.play();
+		s2.play();
+		s3.play();
+		s4.play();
+		s5.play();
+		s6.play();
+		s7.play();
+		
+		//tutorial screen
+		if (Registre.level == 0)
+		{
+			FlxTimer.manager.active = false;
+			FlxTween.manager.active = false;
+			tutoSubState = new TutoState();
+			openSubState(tutoSubState);
+		}
 
 
 	}
