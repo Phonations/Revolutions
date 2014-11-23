@@ -54,6 +54,7 @@ class PlayState extends FlxNapeState
 	private var pauseSubState:PauseState;
 	private var tutoSubState:TutoState;
 	private var loseSubState:LoseState;
+	private var winSubState:WinState;
 	private var fuelBar : FlxBar;
 	private var fuelText : FlxText;
 	private var textTween : FlxTween;
@@ -125,6 +126,7 @@ class PlayState extends FlxNapeState
 		//setup substates
 		pauseSubState = new PauseState();
 		loseSubState = new LoseState();
+		winSubState = new WinState();
 		
 		//launch music
 		/*FlxG.sound.playMusic("assets/sound/musique_beat.ogg");
@@ -189,10 +191,16 @@ class PlayState extends FlxNapeState
 	
 	private function onCrash(collision:InteractionCallback):Void {
 		FlxG.log.add("crash");
+		FlxTimer.manager.active = false;
+		FlxTween.manager.active = false;
+		openSubState(loseSubState);
 	}
 
 	private function onWin(collision:InteractionCallback):Void {
 		FlxG.log.add("win");
+		FlxTimer.manager.active = false;
+		FlxTween.manager.active = false;
+		openSubState(winSubState);
 	}
 
 	override public function update():Void
@@ -249,9 +257,7 @@ class PlayState extends FlxNapeState
 		
 		if (player.fuel == 0)
 		{
-			FlxTimer.manager.active = false;
-			FlxTween.manager.active = false;
-			openSubState(loseSubState);
+			onCrash(null);
 		}
 
 		super.update();
