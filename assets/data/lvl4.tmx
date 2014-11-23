@@ -76,32 +76,29 @@
     <property name="MaxAngleVelocity" value="2"/>
    </properties>
   </object>
-  <object type="planet" gid="4" x="379" y="756">
+  <object type="PlaneteEnd" gid="4" x="2184" y="2324">
    <properties>
-    <property name="mass" value="10"/>
+    <property name="mass" value="5"/>
     <property name="rayon" value="128"/>
     <property name="type" value="Plaete5"/>
    </properties>
   </object>
-  <object type="planet" gid="4" x="1432" y="1052">
+  <object type="PlaneteStart" gid="5" x="544" y="944">
    <properties>
-    <property name="mass" value="10"/>
+    <property name="mass" value="1"/>
     <property name="rayon" value="128"/>
-    <property name="type" value="Plaete5"/>
    </properties>
   </object>
-  <object type="planet" gid="4" x="1388" y="2100">
+  <object type="PlaneteCreuse" gid="1" x="1600" y="1184">
    <properties>
-    <property name="mass" value="10"/>
-    <property name="rayon" value="128"/>
-    <property name="type" value="Plaete5"/>
+    <property name="mass" value="0.5"/>
+    <property name="rayon" value="256"/>
    </properties>
   </object>
-  <object type="planet" gid="4" x="2184" y="2324">
+  <object type="PlaneteTellurique" gid="6" x="1364" y="2136">
    <properties>
-    <property name="mass" value="10"/>
-    <property name="rayon" value="128"/>
-    <property name="type" value="Plaete5"/>
+    <property name="mass" value="6"/>
+    <property name="rayon" value="64"/>
    </properties>
   </object>
  </objectgroup>
