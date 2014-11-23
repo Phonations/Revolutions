@@ -68,7 +68,7 @@
   </tile>
  </tileset>
  <objectgroup name="Calque d'objets 1">
-  <object type="player" gid="2" x="1245.29" y="1508.7">
+  <object type="player" gid="2" x="777.29" y="1528.7">
    <properties>
     <property name="AngleAcceleration" value="0.1"/>
     <property name="EngineAcceleration" value="1"/>
@@ -76,11 +76,18 @@
     <property name="MaxAngleVelocity" value="2"/>
    </properties>
   </object>
-  <object gid="4" x="1415" y="1308">
+  <object gid="4" x="695" y="1336">
    <properties>
     <property name="mass" value="5"/>
     <property name="rayon" value="128"/>
     <property name="type" value="Plaete5"/>
+   </properties>
+  </object>
+  <object gid="7" x="1692" y="1756">
+   <properties>
+    <property name="mass" value="1"/>
+    <property name="rayon" value="512"/>
+    <property name="type" value="2"/>
    </properties>
   </object>
  </objectgroup>
