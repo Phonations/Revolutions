@@ -47,7 +47,8 @@ class PlayState extends FlxNapeState
 	var crashListener : InteractionListener;
 	var winListener : InteractionListener;
 	private var planetCollisionType:CbType=new CbType();
-	private var goalCollisionType:CbType=new CbType();
+	private var endCollisionType:CbType=new CbType();
+	private var startCollisionType:CbType=new CbType();
 	private var playerCollisionType:CbType = new CbType();
 		
 	private var floorShape : FlxNapeSprite;
@@ -104,7 +105,7 @@ class PlayState extends FlxNapeState
 		space = new Space(new Vec2(0, 0));
 		crashListener = new InteractionListener(CbEvent.BEGIN, InteractionType.COLLISION, planetCollisionType, playerCollisionType, onCrash);
 		space.listeners.add(crashListener);
-		winListener = new InteractionListener(CbEvent.BEGIN, InteractionType.COLLISION, goalCollisionType, playerCollisionType, onWin);
+		winListener = new InteractionListener(CbEvent.BEGIN, InteractionType.COLLISION, endCollisionType, playerCollisionType, onWin);
 		space.listeners.add(winListener);
 		
 		//load level
@@ -297,7 +298,9 @@ class PlayState extends FlxNapeState
 					planet.cameras = [cameraGame];
 					add(planet);
 					if (obj.type == "PlaneteEnd")
-						planet.body.cbTypes.add(goalCollisionType);
+						planet.body.cbTypes.add(endCollisionType);
+					else if (obj.type == "PlaneteStart")
+						planet.body.cbTypes.add(startCollisionType);
 					else
 						planet.body.cbTypes.add(planetCollisionType);
 				}
