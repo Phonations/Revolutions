@@ -6,6 +6,7 @@ import flixel.group.FlxTypedGroup;
 import haxe.ds.Vector;
 import flixel.system.FlxSound;
 import flixel.text.FlxText;
+import nape.callbacks.InteractionListener;
 import openfl.geom.Point;
 import openfl.utils.Timer;
 import Std;
@@ -29,8 +30,10 @@ import nape.space.*;
 import nape.geom.*;
 import nape.phys.*;
 import nape.shape.*;
-import flixel.ui.FlxBar;
+import nape.callbacks.*;
 
+import flixel.ui.FlxBar;
+import flixel.group.FlxGroup;
 
 class PlayState extends FlxNapeState
 {
@@ -38,13 +41,21 @@ class PlayState extends FlxNapeState
 	private var spriteBG : FlxSprite;
 	private var spriteBG_stars : FlxSprite;
 	private var player : Spaceship;
-	private var planets : FlxSpriteGroup;
+	private var planets : List<FlxNapeSprite>;
 
 	private var space : Space;
-	
+	var crashListener : InteractionListener;
+	var winListener : InteractionListener;
+	private var planetCollisionType:CbType=new CbType();
+	private var endCollisionType:CbType=new CbType();
+	private var startCollisionType:CbType=new CbType();
+	private var playerCollisionType:CbType = new CbType();
+		
 	private var floorShape : FlxNapeSprite;
 	private var pauseSubState:PauseState;
 	private var tutoSubState:TutoState;
+	private var loseSubState:LoseState;
+	private var winSubState:WinState;
 	private var fuelBar : FlxBar;
 	private var fuelText : FlxText;
 	private var textTween : FlxTween;
@@ -58,7 +69,7 @@ class PlayState extends FlxNapeState
 		// Setup camera
 		FlxG.cameras.bgColor = 0xC2F8FF;
 
-		Registre.level = 1;
+		Registre.level = 4;
 		
 		cameraGame = new FlxCamera(0, 0, FlxG.width, FlxG.height);
 		FlxG.cameras.add(cameraGame);
@@ -92,6 +103,10 @@ class PlayState extends FlxNapeState
 		
 		// Setup physics
 		space = new Space(new Vec2(0, 0));
+		crashListener = new InteractionListener(CbEvent.BEGIN, InteractionType.COLLISION, planetCollisionType, playerCollisionType, onCrash);
+		space.listeners.add(crashListener);
+		winListener = new InteractionListener(CbEvent.BEGIN, InteractionType.COLLISION, endCollisionType, playerCollisionType, onWin);
+		space.listeners.add(winListener);
 		
 		//load level
 		loadLevel("assets/data/lvl" + Registre.level + ".tmx");		
@@ -109,8 +124,10 @@ class PlayState extends FlxNapeState
 		add(fuelText);
 		add(fuelBar);
 		
-		//setup pause state
+		//setup substates
 		pauseSubState = new PauseState();
+		loseSubState = new LoseState();
+		winSubState = new WinState();
 		
 		//launch music
 		/*FlxG.sound.playMusic("assets/sound/musique_beat.ogg");
@@ -172,6 +189,20 @@ class PlayState extends FlxNapeState
 
 		super.destroy();
 	}
+	
+	private function onCrash(collision:InteractionCallback):Void {
+		FlxG.log.add("crash");
+		FlxTimer.manager.active = false;
+		FlxTween.manager.active = false;
+		openSubState(loseSubState);
+	}
+
+	private function onWin(collision:InteractionCallback):Void {
+		FlxG.log.add("win");
+		FlxTimer.manager.active = false;
+		FlxTween.manager.active = false;
+		openSubState(winSubState);
+	}
 
 	override public function update():Void
 	{
@@ -204,10 +235,10 @@ class PlayState extends FlxNapeState
 
 		var gravity:Vec2 = playerAcceleration;
 		
-		for (p in planets.members)
+		for (p in planets)
 		{
 			var d:Float = p.getMidpoint().distanceTo(player.getMidpoint());
-			var g = Registre.gravitationConstant / d / d;
+			var g = Registre.gravitationConstant * p.body.mass / d / d;
 			var angle = FlxAngle.angleBetweenPoint(player, p.getMidpoint(), false);
 			gravity.x += g * Math.cos(angle);
 			gravity.y += g * Math.sin(angle);
@@ -224,6 +255,11 @@ class PlayState extends FlxNapeState
 		{
 			fuelText.color = 0xff0000;
 		}
+		
+		if (player.fuel == 0)
+		{
+			onCrash(null);
+		}
 
 		super.update();
 	}
@@ -232,15 +268,13 @@ class PlayState extends FlxNapeState
 	{
 		var tiledLevel : TiledMap = new TiledMap(data);	
 		
-		
 		// Add spaceship
 		player = new Spaceship(FlxG.width / 2, FlxG.height / 2, space);
 		add(player);
 		player.velocity.x = 50;
 		
 		//add planets		
-		planets = new FlxSpriteGroup();		
-		add(planets);
+		planets = new List<FlxNapeSprite>();
 		for (group in tiledLevel.objectGroups)
 		{
 			for (obj in group.objects)
@@ -251,23 +285,32 @@ class PlayState extends FlxNapeState
 					player.y = obj.y;
 					player.angleAcceleration=Std.parseFloat(obj.custom.AngleAcceleration);
 					player.maxAngleVelocity=Std.parseFloat(obj.custom.MaxAngleVelocity);
-					player.engineAcceleration=Std.parseFloat(obj.custom.EngineAcceleration);
-					FlxG.log.add(obj.custom.AngleAcceleration);
-					FlxG.log.add(player.angleAcceleration);
+					player.engineAcceleration = Std.parseFloat(obj.custom.EngineAcceleration);
+					
+					player.body.cbTypes.add(playerCollisionType);
 				}
 				else
 				{
 					FlxG.log.add(space.gravity);
+					
+					FlxG.log.add(obj.custom.mass);
 					var planet:Planet = new Planet(obj.x, obj.y, obj.type, Std.parseFloat(obj.custom.mass), space);
 					planets.add(planet);
-					
-					planet.orbit = new Orbit(planet.mass);
+					planet.cameras = [cameraGame];
+					add(planet);
+					if (obj.type == "PlaneteEnd")
+						planet.body.cbTypes.add(endCollisionType);
+					else if (obj.type == "PlaneteStart")
+						planet.body.cbTypes.add(startCollisionType);
+					else
+						planet.body.cbTypes.add(planetCollisionType);
+
+								planet.orbit = new Orbit(planet.mass);
 					// set midpoint of the orbit to the planet midpoint
 					planet.orbit.x = planet.x-planet.orbit.width/2;
 					planet.orbit.y = planet.y-planet.orbit.height/2;
 					add(planet.orbit);
-				}			
-				
+				}
 			}
 		}	
 	}

@@ -67,24 +67,13 @@
    </properties>
   </tile>
  </tileset>
- <tileset firstgid="8" name="gabari-ecran" tilewidth="1920" tileheight="1080">
-  <image source="../../../../../../../GAMEJAM/RevolutionS/maquettage/gabari-ecran.png" width="1920" height="1080"/>
- </tileset>
  <objectgroup name="Calque d'objets 1">
-  <object type="player" gid="2" x="1245.29" y="1508.7">
+  <object type="player" gid="2" x="777.29" y="1528.7">
    <properties>
     <property name="AngleAcceleration" value="0.1"/>
     <property name="EngineAcceleration" value="1"/>
     <property name="G" value=""/>
     <property name="MaxAngleVelocity" value="2"/>
-   </properties>
-  </object>
-  <object gid="8" x="3214" y="2069"/>
-  <object gid="4" x="1415" y="1308">
-   <properties>
-    <property name="mass" value="5"/>
-    <property name="rayon" value="128"/>
-    <property name="type" value="Plaete5"/>
    </properties>
   </object>
  </objectgroup>

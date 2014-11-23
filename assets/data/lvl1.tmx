@@ -70,24 +70,16 @@
  <objectgroup name="Calque d'objets 1">
   <object type="player" gid="2" x="1245.29" y="1508.7">
    <properties>
-    <property name="AngleAcceleration" value="0.1"/>
-    <property name="EngineAcceleration" value="100"/>
+    <property name="AngleAcceleration" value="0.2"/>
+    <property name="EngineAcceleration" value="190"/>
     <property name="G" value=""/>
     <property name="MaxAngleVelocity" value="2"/>
    </properties>
   </object>
-  <object type="planet" gid="4" x="1415" y="1308">
+  <object type="PlaneteStart" gid="5" x="944" y="1408">
    <properties>
     <property name="mass" value="1"/>
     <property name="rayon" value="128"/>
-    <property name="type" value="Plaete5"/>
-   </properties>
-  </object>
-  <object type="planet" gid="4" x="2560.61" y="1339.39">
-   <properties>
-    <property name="mass" value="-10"/>
-    <property name="rayon" value="128"/>
-    <property name="type" value="Plaete5"/>
    </properties>
   </object>
  </objectgroup>

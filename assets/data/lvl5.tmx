@@ -68,24 +68,37 @@
   </tile>
  </tileset>
  <objectgroup name="Calque d'objets 1">
-  <object type="player" gid="2" x="1245.29" y="1508.7">
+  <object type="player" gid="2" x="1009.29" y="1148.7">
    <properties>
-    <property name="AngleAcceleration" value="0.1"/>
-    <property name="EngineAcceleration" value="100"/>
+    <property name="AngleAcceleration" value="0.2"/>
+    <property name="EngineAcceleration" value="200"/>
     <property name="G" value=""/>
     <property name="MaxAngleVelocity" value="2"/>
    </properties>
   </object>
-  <object type="PlaneteEnd" gid="4" x="2064" y="1288">
+  <object type="PlaneteEnd" gid="4" x="1968" y="2080">
    <properties>
-    <property name="mass" value="1"/>
+    <property name="mass" value="2"/>
+    <property name="rayon" value="128"/>
+    <property name="type" value="Plaete5"/>
+   </properties>
+  </object>
+  <object type="PlaneteStart" gid="5" x="544" y="944">
+   <properties>
+    <property name="mass" value="0.5"/>
     <property name="rayon" value="128"/>
    </properties>
   </object>
-  <object type="PlaneteStart" gid="5" x="488" y="1192">
+  <object type="PlaneteCreuse" gid="1" x="780" y="1984">
    <properties>
-    <property name="mass" value="1"/>
-    <property name="rayon" value="128"/>
+    <property name="mass" value="0.5"/>
+    <property name="rayon" value="256"/>
+   </properties>
+  </object>
+  <object type="PlaneteTellurique" gid="6" x="2200" y="1092">
+   <properties>
+    <property name="mass" value="1.5"/>
+    <property name="rayon" value="64"/>
    </properties>
   </object>
  </objectgroup>
