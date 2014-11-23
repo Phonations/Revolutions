@@ -40,12 +40,6 @@ class MenuState extends FlxState
 
 		Registre.CoefScale = new FlxPoint(FlxG.width / 1920, FlxG.height / 1080);
 
-		spriteBG = new FlxSprite(0, 0);
-		spriteBG.loadGraphic('assets/images/Menu.jpg');
-		spriteBG.scale.x = Registre.CoefScale.x;
-		spriteBG.scale.y = Registre.CoefScale.y;
-		spriteBG.updateHitbox();
-		
 		//loading sounds to avoid slowdowd at first lvl
 		FlxG.sound.load("assets/sound/musique_beat.ogg");
 		FlxG.sound.load("assets/sound/musique_butterfly.ogg");
@@ -55,6 +49,11 @@ class MenuState extends FlxState
 		FlxG.sound.load("assets/sound/musique_split_tabular.ogg");
 		FlxG.sound.load("assets/sound/musique_harpolodic.ogg");
 
+		spriteBG = new FlxSprite(0, 0);
+		spriteBG.loadGraphic('assets/images/Menu.jpg');
+		spriteBG.scale.x = Registre.CoefScale.x;
+		spriteBG.scale.y = Registre.CoefScale.y;
+		spriteBG.updateHitbox();
 
 		add(spriteBG);
 
