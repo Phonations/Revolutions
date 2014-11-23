@@ -6,6 +6,7 @@ import flixel.group.FlxTypedGroup;
 import haxe.ds.Vector;
 import flixel.system.FlxSound;
 import flixel.text.FlxText;
+import nape.callbacks.InteractionListener;
 import openfl.geom.Point;
 import openfl.utils.Timer;
 import Std;
@@ -29,9 +30,10 @@ import nape.space.*;
 import nape.geom.*;
 import nape.phys.*;
 import nape.shape.*;
+import nape.callbacks.*;
+
 import flixel.ui.FlxBar;
 import flixel.group.FlxGroup;
-
 
 class PlayState extends FlxNapeState
 {
@@ -42,11 +44,17 @@ class PlayState extends FlxNapeState
 	private var planets : List<FlxNapeSprite>;
 
 	private var space : Space;
-	
+	var crashListener : InteractionListener;
+	var winListener : InteractionListener;
+	private var planetCollisionType:CbType=new CbType();
+	private var goalCollisionType:CbType=new CbType();
+	private var playerCollisionType:CbType = new CbType();
+		
 	private var floorShape : FlxNapeSprite;
 	private var pauseSubState:PauseState;
 	private var tutoSubState:TutoState;
 	private var loseSubState:LoseState;
+	private var winSubState:WinState;
 	private var fuelBar : FlxBar;
 	private var fuelText : FlxText;
 	private var textTween : FlxTween;
@@ -94,6 +102,10 @@ class PlayState extends FlxNapeState
 		
 		// Setup physics
 		space = new Space(new Vec2(0, 0));
+		crashListener = new InteractionListener(CbEvent.BEGIN, InteractionType.COLLISION, planetCollisionType, playerCollisionType, onCrash);
+		space.listeners.add(crashListener);
+		winListener = new InteractionListener(CbEvent.BEGIN, InteractionType.COLLISION, goalCollisionType, playerCollisionType, onWin);
+		space.listeners.add(winListener);
 		
 		//load level
 		loadLevel("assets/data/lvl" + Registre.level + ".tmx");		
@@ -114,6 +126,7 @@ class PlayState extends FlxNapeState
 		//setup substates
 		pauseSubState = new PauseState();
 		loseSubState = new LoseState();
+		winSubState = new WinState();
 		
 		//launch music
 		/*FlxG.sound.playMusic("assets/sound/musique_beat.ogg");
@@ -175,6 +188,20 @@ class PlayState extends FlxNapeState
 
 		super.destroy();
 	}
+	
+	private function onCrash(collision:InteractionCallback):Void {
+		FlxG.log.add("crash");
+		FlxTimer.manager.active = false;
+		FlxTween.manager.active = false;
+		openSubState(loseSubState);
+	}
+
+	private function onWin(collision:InteractionCallback):Void {
+		FlxG.log.add("win");
+		FlxTimer.manager.active = false;
+		FlxTween.manager.active = false;
+		openSubState(winSubState);
+	}
 
 	override public function update():Void
 	{
@@ -203,7 +230,6 @@ class PlayState extends FlxNapeState
 		{
 			playerAcceleration.x += player.engineAcceleration * Math.cos(FlxAngle.asRadians(player.angle));
 			playerAcceleration.y += player.engineAcceleration * Math.sin(FlxAngle.asRadians(player.angle));
-		//	FlxG.log.add(playerAcceleration);
 		}
 
 		var gravity:Vec2 = playerAcceleration;
@@ -215,7 +241,6 @@ class PlayState extends FlxNapeState
 			var angle = FlxAngle.angleBetweenPoint(player, p.getMidpoint(), false);
 			gravity.x += g * Math.cos(angle);
 			gravity.y += g * Math.sin(angle);
-			FlxG.log.add(p.body.mass);
 		}
 
 		space.gravity = gravity;
@@ -232,9 +257,7 @@ class PlayState extends FlxNapeState
 		
 		if (player.fuel == 0)
 		{
-			FlxTimer.manager.active = false;
-			FlxTween.manager.active = false;
-			openSubState(loseSubState);
+			onCrash(null);
 		}
 
 		super.update();
@@ -243,7 +266,6 @@ class PlayState extends FlxNapeState
 	private function loadLevel(data:Dynamic):Void
 	{
 		var tiledLevel : TiledMap = new TiledMap(data);	
-		
 		
 		// Add spaceship
 		player = new Spaceship(FlxG.width / 2, FlxG.height / 2, space);
@@ -262,7 +284,9 @@ class PlayState extends FlxNapeState
 					player.y = obj.y;
 					player.angleAcceleration=Std.parseFloat(obj.custom.AngleAcceleration);
 					player.maxAngleVelocity=Std.parseFloat(obj.custom.MaxAngleVelocity);
-					player.engineAcceleration=Std.parseFloat(obj.custom.EngineAcceleration);
+					player.engineAcceleration = Std.parseFloat(obj.custom.EngineAcceleration);
+					
+					player.body.cbTypes.add(playerCollisionType);
 				}
 				else
 				{
@@ -272,8 +296,11 @@ class PlayState extends FlxNapeState
 					planets.add(planet);
 					planet.cameras = [cameraGame];
 					add(planet);
-				}			
-				
+					if (obj.type == "PlaneteEnd")
+						planet.body.cbTypes.add(goalCollisionType);
+					else
+						planet.body.cbTypes.add(planetCollisionType);
+				}
 			}
 		}	
 	}
