@@ -23,15 +23,15 @@ class Planet extends FlxNapeSprite
 		
 		FlxG.log.add("planet");
 		FlxG.log.add(radius);
-//		scale.x = radius / width;
-//		scale.y = radius / height;
-		FlxG.log.add(scale.x);
-		FlxG.log.add(scale.y);
-		FlxG.log.add(width);
-		FlxG.log.add(height);
+		//scale.x = 2 * radius / width;
+		//scale.y = 2 * radius / height;
+		//FlxG.log.add(scale.x);
+		//FlxG.log.add(scale.y);
+		//FlxG.log.add(width);
+		//FlxG.log.add(height);
 		//makeGraphic(512, 512, FlxColor.CORAL);
-	//	createCircularBody(radius, BodyType.STATIC);
-		createCircularBody(128, BodyType.STATIC);
+		//createCircularBody(radius, BodyType.STATIC);
+		createCircularBody(width / 2, BodyType.STATIC);
 		setBodyMaterial(1, 0.2, 0.4, mass);
 		body.space = space;
 		updateHitbox();

@@ -59,8 +59,9 @@ class PlayState extends FlxNapeState
 	private var fuelBar : FlxBar;
 	private var fuelText : FlxText;
 	private var textTween : FlxTween;
+	
 
-	override public function create():Void
+	override public function create() : Void
 	{
 		super.create();
 

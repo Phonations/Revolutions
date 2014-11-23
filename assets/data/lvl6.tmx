@@ -68,7 +68,7 @@
   </tile>
  </tileset>
  <objectgroup name="Calque d'objets 1">
-  <object type="player" gid="2" x="1009.29" y="1148.7">
+  <object type="player" gid="2" x="624.442" y="1154.76">
    <properties>
     <property name="AngleAcceleration" value="0.2"/>
     <property name="EngineAcceleration" value="200"/>
@@ -82,7 +82,7 @@
     <property name="rayon" value="120"/>
    </properties>
   </object>
-  <object type="PlaneteGazeuse" gid="7" x="2009.21" y="2945.33">
+  <object type="PlaneteStart" gid="7" x="1215.27" y="799.875">
    <properties>
     <property name="mass" value="0.5"/>
     <property name="rayon" value="500"/>
