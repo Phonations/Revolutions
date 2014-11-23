@@ -185,13 +185,13 @@ class PlayState extends FlxNapeState
 		if (FlxG.keys.pressed.S || FlxG.keys.pressed.LEFT)
 
 		{
-			if (player.body.angularVel > -Registre.maxVelocityRotation)
-				player.body.angularVel -= Registre.keyPressedAngleAcceleration;
+			if (player.body.angularVel > -Registre.spaceshipMaxAngleVelocity)
+				player.body.angularVel -= Registre.spaceshipAngleAcceleration;
 		}
 		if (FlxG.keys.pressed.F || FlxG.keys.pressed.RIGHT)
 		{
-			if (player.body.angularVel < Registre.maxVelocityRotation)
-				player.body.angularVel += Registre.keyPressedAngleAcceleration;
+			if (player.body.angularVel < Registre.spaceshipMaxAngleVelocity)
+				player.body.angularVel += Registre.spaceshipAngleAcceleration;
 		}
 		player.engine = FlxG.keys.pressed.UP || FlxG.keys.pressed.E || FlxG.mouse.pressed;
 
@@ -206,7 +206,7 @@ class PlayState extends FlxNapeState
 		for (p in planets.members)
 		{
 			var d:Float = p.getMidpoint().distanceTo(player.getMidpoint());
-			var g = 10000000 / d / d;
+			var g = Registre.gravitationConstant / d / d;
 			var angle = FlxAngle.angleBetweenPoint(player, p.getMidpoint(), false);
 			gravity.x += g * Math.cos(angle);
 			gravity.y += g * Math.sin(angle);
