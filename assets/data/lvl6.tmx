@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <map version="1.0" orientation="orthogonal" renderorder="right-down" width="100" height="100" tilewidth="32" tileheight="32">
  <tileset firstgid="1" name="PlaneteCreuse" tilewidth="512" tileheight="512">
-  <image source="../images/PlaneteCreuse.png" width="512" height="512"/>
+  <image source="../images/PlaneteCreuse.png" width="476" height="476"/>
   <tile id="0">
    <properties>
     <property name="Mass" value=""/>
@@ -28,7 +28,7 @@
   </tile>
  </tileset>
  <tileset firstgid="4" name="PlaneteEnd" tilewidth="256" tileheight="256">
-  <image source="../images/PlaneteEnd.png" width="256" height="256"/>
+  <image source="../images/PlaneteEnd.png" width="238" height="240"/>
   <tile id="0">
    <properties>
     <property name="Mass" value=""/>
@@ -38,7 +38,7 @@
   </tile>
  </tileset>
  <tileset firstgid="5" name="PlaneteStart" tilewidth="256" tileheight="256">
-  <image source="../images/PlaneteStart.png" width="256" height="256"/>
+  <image source="../images/PlaneteStart.png" width="238" height="238"/>
   <tile id="0">
    <properties>
     <property name="Mass" value=""/>
@@ -48,7 +48,7 @@
   </tile>
  </tileset>
  <tileset firstgid="6" name="PlaneteTellurique" tilewidth="128" tileheight="128">
-  <image source="../images/PlaneteTellurique.png" width="128" height="128"/>
+  <image source="../images/PlaneteTellurique.png" width="120" height="120"/>
   <tile id="0">
    <properties>
     <property name="Mass" value=""/>
@@ -68,7 +68,7 @@
   </tile>
  </tileset>
  <objectgroup name="Calque d'objets 1">
-  <object type="player" gid="2" x="624.442" y="1154.76">
+  <object type="player" gid="2" x="1009.29" y="1148.7">
    <properties>
     <property name="AngleAcceleration" value="0.2"/>
     <property name="EngineAcceleration" value="200"/>
@@ -82,7 +82,7 @@
     <property name="rayon" value="120"/>
    </properties>
   </object>
-  <object type="PlaneteStart" gid="7" x="1215.27" y="799.875">
+  <object type="PlaneteGazeuse" gid="7" x="1354.67" y="1921.09">
    <properties>
     <property name="mass" value="0.5"/>
     <property name="rayon" value="500"/>
