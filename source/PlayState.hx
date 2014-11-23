@@ -59,7 +59,7 @@ class PlayState extends FlxNapeState
 		// Setup camera
 		FlxG.cameras.bgColor = 0xC2F8FF;
 
-		Registre.level = 2;
+		Registre.level = 4;
 		
 		cameraGame = new FlxCamera(0, 0, FlxG.width, FlxG.height);
 		FlxG.cameras.add(cameraGame);
