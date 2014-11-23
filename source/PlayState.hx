@@ -39,6 +39,7 @@ class PlayState extends FlxNapeState
 	private var spriteBG_stars : FlxSprite;
 	private var player : Spaceship;
 	private var planets : FlxSpriteGroup;
+	private var orbit : Orbit;
 
 	private var space : Space;
 	
@@ -58,7 +59,7 @@ class PlayState extends FlxNapeState
 		// Setup camera
 		FlxG.cameras.bgColor = 0xC2F8FF;
 
-		Registre.level = 1;
+		Registre.level = 2;
 		
 		cameraGame = new FlxCamera(0, 0, FlxG.width, FlxG.height);
 		FlxG.cameras.add(cameraGame);
@@ -204,6 +205,7 @@ class PlayState extends FlxNapeState
 
 		var gravity:Vec2 = playerAcceleration;
 		
+		// compute gravity
 		for (p in planets.members)
 		{
 			var d:Float = p.getMidpoint().distanceTo(player.getMidpoint());
@@ -212,10 +214,14 @@ class PlayState extends FlxNapeState
 			gravity.x += g * Math.cos(angle);
 			gravity.y += g * Math.sin(angle);
 		}
+		
 
 		space.gravity = gravity;
 		
 		space.step(1 / 30);
+
+		// update orbit
+		orbit.updateRadius(player.body.velocity);
 
 		//update fuelbar
 		fuelBar.currentValue = player.fuel;
@@ -237,10 +243,14 @@ class PlayState extends FlxNapeState
 		player = new Spaceship(FlxG.width / 2, FlxG.height / 2, space);
 		add(player);
 		player.velocity.x = 50;
-		
+
+		// add orbit
+		orbit = new Orbit();
+
 		//add planets		
-		planets = new FlxSpriteGroup();		
+		planets = new FlxSpriteGroup();
 		add(planets);
+		
 		for (group in tiledLevel.objectGroups)
 		{
 			for (obj in group.objects)
@@ -261,13 +271,8 @@ class PlayState extends FlxNapeState
 					var planet:Planet = new Planet(obj.x, obj.y, obj.type, Std.parseFloat(obj.custom.mass), space);
 					planets.add(planet);
 					
-					planet.orbit = new Orbit(planet.mass);
-					// set midpoint of the orbit to the planet midpoint
-					planet.orbit.x = planet.x-planet.orbit.width/2;
-					planet.orbit.y = planet.y-planet.orbit.height/2;
-					add(planet.orbit);
+					orbit.updatePlanet(planet);
 				}			
-				
 			}
 		}	
 	}
