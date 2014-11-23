@@ -38,6 +38,25 @@ class MenuState extends FlxState
 
 		FlxG.camera.antialiasing = true;
 
+		lvlButtonGroup = new FlxTypedGroup();
+		
+		// set lvl buttons
+		var bt : FlxButton;
+		bt = new FlxButton(800,500,onBtClick.bind(0));
+		bt.loadGraphic('assets/images/Tutorial.png',false,150,44);
+		//bt.scale.x = bt.scale.y = Registre.CoefScale.x;
+		bt.updateHitbox();
+		lvlButtonGroup.add(bt);
+	
+		bt = new FlxButton(1000,500,null,onBtClick.bind(1));
+		bt.loadGraphic('assets/images/Challenge.png',false,190,60);
+		//bt.scale.x = bt.scale.y = Registre.CoefScale.x;
+		bt.updateHitbox();
+		lvlButtonGroup.add(bt);
+
+		add(lvlButtonGroup);
+		Registre.level = 1;
+		
 		Registre.CoefScale = new FlxPoint(FlxG.width / 1920, FlxG.height / 1080);
 
 		//loading sounds to avoid slowdowd at first lvl
@@ -60,28 +79,6 @@ class MenuState extends FlxState
 		//FlxTween.circularMotion(spSpaceship, spPlanet.x+spPlanet.width/2, spPlanet.y+spPlanet.height/2, 600, 90, true, 100, true, { type:FlxTween.LOOPING } );
 		//FlxTween.angle(spSpaceship, 0, -1, 10, { type:FlxTween.LOOPING });
 		//tw  = FlxTween.tween(spSpaceship, { x:600, y:800 }, 2, { type:FlxTween.circularMotion(spSpaceship, 0, 1080,500,0,true,1,true)});
-		
-		
-
-
-		lvlButtonGroup = new FlxTypedGroup();
-		
-		// set lvl buttons
-		var bt : FlxButton;
-		bt = new FlxButton(800,500,onBtClick.bind(0));
-		bt.loadGraphic('assets/images/Tutorial.png',false,150,44);
-		//bt.scale.x = bt.scale.y = Registre.CoefScale.x;
-		bt.updateHitbox();
-		lvlButtonGroup.add(bt);
-	
-		bt = new FlxButton(1000,500,null,onBtClick.bind(1));
-		bt.loadGraphic('assets/images/Challenge.png',false,190,60);
-		//bt.scale.x = bt.scale.y = Registre.CoefScale.x;
-		bt.updateHitbox();
-		lvlButtonGroup.add(bt);
-
-		add(lvlButtonGroup);
-		Registre.level = 1;
 	}
 
 
