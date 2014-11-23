@@ -9,16 +9,18 @@ import nape.space.*;
 import nape.geom.*;
 import nape.phys.*;
 import nape.shape.*;
+import Orbit;
 
 class Planet extends FlxNapeSprite
 {
+	public var orbit:Orbit;
 	
-	public function new(X:Float, Y:Float, type : String, mass : Int, space:Space)
+	public function new(X:Float, Y:Float, type : String, mass : Float, space:Space)
 	{
 		super(X, Y, null, false, true);
 		loadGraphic("assets/images/PlaneteStart.png");
-		//makeGraphic(512, 512, FlxColor.CORAL);
 		createCircularBody(128, BodyType.STATIC);
 		body.space = space;
+		orbit = new Orbit(mass);
 	}		
 }

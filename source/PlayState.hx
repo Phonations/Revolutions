@@ -145,8 +145,6 @@ class PlayState extends FlxNapeState
 			tutoSubState = new TutoState();
 			openSubState(tutoSubState);
 		}
-
-
 	}
 
 	override public function onFocusLost():Void
@@ -260,7 +258,7 @@ class PlayState extends FlxNapeState
 				else
 				{
 					FlxG.log.add(space.gravity);
-					planets.add(new Planet(obj.x, obj.y, obj.type,Std.parseInt(obj.custom.mass), space));
+					planets.add(new Planet(obj.x, obj.y, obj.type,Std.parseFloat(obj.custom.mass), space));
 				}			
 				
 			}
