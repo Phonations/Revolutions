@@ -91,37 +91,37 @@
   </object>
   <object type="PlaneteCreuse" gid="1" x="1304" y="2532">
    <properties>
-    <property name="mass" value="1"/>
+    <property name="mass" value="0.5"/>
     <property name="rayon" value="1"/>
    </properties>
   </object>
   <object type="PlaneteCreuse" gid="1" x="1980" y="3124">
    <properties>
-    <property name="mass" value="1"/>
+    <property name="mass" value="0.5"/>
     <property name="rayon" value="1"/>
    </properties>
   </object>
   <object type="PlaneteCreuse" gid="1" x="504" y="1860">
    <properties>
-    <property name="mass" value="1"/>
+    <property name="mass" value="0.5"/>
     <property name="rayon" value="1"/>
    </properties>
   </object>
   <object type="PlaneteCreuse" gid="1" x="1428" y="808">
    <properties>
-    <property name="mass" value="1"/>
+    <property name="mass" value="0.5"/>
     <property name="rayon" value="1"/>
    </properties>
   </object>
   <object type="PlaneteCreuse" gid="1" x="2112" y="1200">
    <properties>
-    <property name="mass" value="1"/>
+    <property name="mass" value="0.5"/>
     <property name="rayon" value="1"/>
    </properties>
   </object>
   <object type="PlaneteCreuse" gid="1" x="2552" y="2012">
    <properties>
-    <property name="mass" value="1"/>
+    <property name="mass" value="0.5"/>
     <property name="rayon" value="1"/>
    </properties>
   </object>
