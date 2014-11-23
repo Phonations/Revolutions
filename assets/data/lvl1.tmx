@@ -2,15 +2,86 @@
 <map version="1.0" orientation="orthogonal" renderorder="right-down" width="100" height="100" tilewidth="32" tileheight="32">
  <tileset firstgid="1" name="PlaneteCreuse" tilewidth="512" tileheight="512">
   <image source="../images/PlaneteCreuse.png" width="512" height="512"/>
+  <tile id="0">
+   <properties>
+    <property name="Mass" value=""/>
+    <property name="Rayon" value=""/>
+    <property name="Type" value=""/>
+   </properties>
+  </tile>
  </tileset>
  <tileset firstgid="2" name="Spaceship" tilewidth="128" tileheight="90">
   <image source="../images/Spaceship.png" width="128" height="180"/>
+  <tile id="0">
+   <properties>
+    <property name="EngineAcceleration" value=""/>
+    <property name="G" value=""/>
+    <property name="RotationAcceleration" value=""/>
+   </properties>
+  </tile>
+  <tile id="1">
+   <properties>
+    <property name="EngineAcceleration" value=""/>
+    <property name="G" value=""/>
+    <property name="RotationAcceleration" value=""/>
+   </properties>
+  </tile>
+ </tileset>
+ <tileset firstgid="4" name="PlaneteEnd" tilewidth="256" tileheight="256">
+  <image source="../images/PlaneteEnd.png" width="256" height="256"/>
+  <tile id="0">
+   <properties>
+    <property name="Mass" value=""/>
+    <property name="Rayon" value=""/>
+    <property name="Type" value=""/>
+   </properties>
+  </tile>
+ </tileset>
+ <tileset firstgid="5" name="PlaneteStart" tilewidth="256" tileheight="256">
+  <image source="../images/PlaneteStart.png" width="256" height="256"/>
+  <tile id="0">
+   <properties>
+    <property name="Mass" value=""/>
+    <property name="Rayon" value=""/>
+    <property name="Type" value=""/>
+   </properties>
+  </tile>
+ </tileset>
+ <tileset firstgid="6" name="PlaneteTellurique" tilewidth="128" tileheight="128">
+  <image source="../images/PlaneteTellurique.png" width="128" height="128"/>
+  <tile id="0">
+   <properties>
+    <property name="Mass" value=""/>
+    <property name="Rayon" value=""/>
+    <property name="Type" value=""/>
+   </properties>
+  </tile>
+ </tileset>
+ <tileset firstgid="7" name="PlaneteGazeuse" tilewidth="1024" tileheight="1024">
+  <image source="../images/PlaneteGazeuse.png" width="1024" height="1024"/>
+  <tile id="0">
+   <properties>
+    <property name="Mass" value=""/>
+    <property name="Rayon" value="512"/>
+    <property name="Type" value=""/>
+   </properties>
+  </tile>
  </tileset>
  <objectgroup name="Calque d'objets 1">
-  <object type="planet_type_1" gid="1" x="761.364" y="1426.61"/>
-  <object gid="2" x="214.788" y="1214.7"/>
-  <object type="planet_type_1" gid="1" x="2284.85" y="687.879"/>
-  <object type="planet_type_1" gid="1" x="1766.67" y="2593.94"/>
-  <object type="planet_type_1" gid="1" x="206.061" y="2815.15"/>
+  <object type="player" gid="2" x="1245.29" y="1508.7">
+   <properties>
+    <property name="AngleAcceleration" value="0.1"/>
+    <property name="EngineAcceleration" value="1500"/>
+    <property name="G" value=""/>
+    <property name="MaxAngleVelocity" value="2"/>
+   </properties>
+  </object>
+  <object type="planet" gid="4" x="1415" y="1308">
+   <properties>
+    <property name="mass" value="5"/>
+    <property name="rayon" value="128"/>
+    <property name="type" value="Plaete5"/>
+   </properties>
+  </object>
  </objectgroup>
 </map>

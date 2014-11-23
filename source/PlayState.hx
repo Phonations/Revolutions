@@ -195,13 +195,14 @@ class PlayState extends FlxNapeState
 		}
 		player.engine = FlxG.keys.pressed.UP || FlxG.keys.pressed.E || FlxG.mouse.pressed;
 
-		var gravity:Vec2 = new Vec2(0, 0);
+		var playerAcceleration:Vec2 = new Vec2(0, 0);
 		if (player.engine && (player.fuel>0))
 		{
-			var k:Float = 1000;
-			gravity.x += k * Math.cos(FlxAngle.asRadians(player.angle));
-			gravity.y += k * Math.sin(FlxAngle.asRadians(player.angle));
+			playerAcceleration.x += player.engineAcceleration * Math.cos(FlxAngle.asRadians(player.angle));
+			playerAcceleration.y += player.engineAcceleration * Math.sin(FlxAngle.asRadians(player.angle));
 		}
+
+		var gravity:Vec2 = playerAcceleration;
 		
 		for (p in planets.members)
 		{
@@ -212,9 +213,6 @@ class PlayState extends FlxNapeState
 			gravity.y += g * Math.sin(angle);
 		}
 
-		FlxG.log.add(gravity);
-		FlxG.log.add(player.angularVelocity);
-		FlxG.log.add(player.angle);
 		space.gravity = gravity;
 		
 		space.step(1 / 30);
@@ -251,9 +249,11 @@ class PlayState extends FlxNapeState
 				{
 					player.x = obj.x;
 					player.y = obj.y;
-					player.angleAcceleration=Std.parseInt(obj.custom.AngleAcceleration);
-					player.maxAngleVelocity=Std.parseInt(obj.custom.MaxAngleVelocity);
-					player.engineAcceleration=Std.parseInt(obj.custom.EngineAcceleration);
+					player.angleAcceleration=Std.parseFloat(obj.custom.AngleAcceleration);
+					player.maxAngleVelocity=Std.parseFloat(obj.custom.MaxAngleVelocity);
+					player.engineAcceleration=Std.parseFloat(obj.custom.EngineAcceleration);
+					FlxG.log.add(obj.custom.AngleAcceleration);
+					FlxG.log.add(player.angleAcceleration);
 				}
 				else
 				{
