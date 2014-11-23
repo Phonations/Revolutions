@@ -13,6 +13,7 @@ import openfl.Assets;
 import flixel.group.FlxTypedGroup;
 import flixel.system.debug.FlxDebugger;
 import flixel.util.FlxColor;
+import flixel.system.FlxSound;
 
 /**
  * A FlxState which can be used for the game's menu.
@@ -54,6 +55,18 @@ class MenuState extends FlxState
 		FlxG.sound.load("assets/sound/musique_tabular.mp3");
 		FlxG.sound.load("assets/sound/musique_split_tabular.mp3");
 		FlxG.sound.load("assets/sound/musique_harpolodic.mp3");
+		
+		
+		var s1 : FlxSound=FlxG.sound.load("assets/sound/musique_tabular.mp3",1,true);
+		var s2 : FlxSound=FlxG.sound.load("assets/sound/musique_split_tabular.mp3",1,true);
+		var s3 : FlxSound=FlxG.sound.load("assets/sound/musique_glassy.mp3",1,true);
+		var s4 : FlxSound = FlxG.sound.load("assets/sound/musique_harpolodic.mp3", 1, true);
+		
+		s1.play();
+		s2.play();
+		s3.play();
+		s4.play();
+
 
 
 		add(spriteBG);

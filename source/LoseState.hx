@@ -12,6 +12,7 @@ import flixel.util.FlxColor;
 import flixel.text.FlxText;
 import flixel.util.FlxDestroyUtil;
 import flixel.addons.ui.FlxSlider;
+import flixel.system.FlxSound;
 
 /**
  * ...
@@ -54,7 +55,8 @@ class LoseState extends FlxSubState
 		add(BGSprite);
 		add(startBtn);
 		add(loseSprite);
-
+		
+		var s1 : FlxSound =FlxG.sound.load("assets/sound/Lose.mp3",1,false);
 	}
 
 	private function gotoMenu():Void

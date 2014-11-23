@@ -60,8 +60,14 @@ class PlayState extends FlxNapeState
 	private var fuelText : FlxText;
 	private var textTween : FlxTween;
 	
-
-	override public function create() : Void
+	private var s1 : FlxSound;
+	private var s2 : FlxSound;
+	private var s3 : FlxSound;
+	private var s4 : FlxSound;
+	private var s5 : FlxSound;
+	private var s6 : FlxSound;
+	private var s7 : FlxSound;
+	override public function create():Void
 	{
 		super.create();
 
@@ -139,13 +145,13 @@ class PlayState extends FlxNapeState
 		FlxG.sound.playMusic("assets/sound/musique_split_tabular.ogg");
 		FlxG.sound.playMusic("assets/sound/musique_harpolodic.ogg");*/
 		
-		var s1 : FlxSound =FlxG.sound.load("assets/sound/musique_beat.mp3",1,true);
-		var s2 : FlxSound=FlxG.sound.load("assets/sound/musique_butterfly.mp3",1,true);
-		var s3 : FlxSound=FlxG.sound.load("assets/sound/musique_glass.mp3",1,true);
-		var s4 : FlxSound=FlxG.sound.load("assets/sound/musique_glassy.mp3",1,true);
-		var s5 : FlxSound=FlxG.sound.load("assets/sound/musique_tabular.mp3",1,true);
-		var s6 : FlxSound=FlxG.sound.load("assets/sound/musique_split_tabular.mp3",1,true);
-		var s7 : FlxSound = FlxG.sound.load("assets/sound/musique_harpolodic.mp3", 1, true);
+		s1  =FlxG.sound.load("assets/sound/musique_beat.mp3",1,true);
+		s2 =FlxG.sound.load("assets/sound/musique_butterfly.mp3",1,true);
+		s3 =FlxG.sound.load("assets/sound/musique_glass.mp3",1,true);
+		s4 =FlxG.sound.load("assets/sound/musique_glassy.mp3",1,true);
+		s5 =FlxG.sound.load("assets/sound/musique_tabular.mp3",1,true);
+		s6 =FlxG.sound.load("assets/sound/musique_split_tabular.mp3",1,true);
+		s7 = FlxG.sound.load("assets/sound/musique_harpolodic.mp3", 1, true);
 		
 		s1.play();
 		s2.play();
@@ -195,23 +201,43 @@ class PlayState extends FlxNapeState
 		FlxG.log.add("crash");
 		FlxTimer.manager.active = false;
 		FlxTween.manager.active = false;
+		s1.volume=.1;
+		s2.volume=.1;
+		s3.volume=.1;
+		s4.volume=.1;
+		s5.volume=.1;
+		s6.volume=.1;
+		s7.volume = .1;
 		openSubState(loseSubState);
+		player.soundEngine.stop();
 	}
 
 	private function onWin(collision:InteractionCallback):Void {
 		FlxG.log.add("win");
 		FlxTimer.manager.active = false;
 		FlxTween.manager.active = false;
+		s1.volume=.1;
+		s2.volume=.1;
+		s3.volume=.1;
+		s4.volume=.1;
+		s5.volume=.1;
+		s6.volume=.1;
+		s7.volume = .1;
+
 		openSubState(winSubState);
+		player.soundEngine.stop();
 	}
 
 	override public function update():Void
 	{
 		if (FlxG.keys.justPressed.ESCAPE)
 		{		
+			FlxG.sound.volume = 0.1;
 			FlxTimer.manager.active = false;
 			FlxTween.manager.active = false;
 			openSubState(pauseSubState);
+			player.soundEngine.stop();
+			
 		}
 		
 		if (FlxG.keys.pressed.S || FlxG.keys.pressed.LEFT)
@@ -227,6 +253,11 @@ class PlayState extends FlxNapeState
 		}
 		player.engine = FlxG.keys.pressed.UP || FlxG.keys.pressed.E || FlxG.mouse.pressed;
 
+		if (FlxG.keys.justPressed.UP || FlxG.keys.justPressed.E )
+		{
+			player.soundEngine.play();
+		}
+		
 		var playerAcceleration:Vec2 = new Vec2(0, 0);
 		if (player.engine && (player.fuel>0))
 		{
