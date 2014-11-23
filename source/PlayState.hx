@@ -262,6 +262,7 @@ class PlayState extends FlxNapeState
 					planets.add(planet);
 					
 					planet.orbit = new Orbit(planet.mass);
+					// set midpoint of the orbit to the planet midpoint
 					planet.orbit.x = planet.x-planet.orbit.width/2;
 					planet.orbit.y = planet.y-planet.orbit.height/2;
 					add(planet.orbit);
