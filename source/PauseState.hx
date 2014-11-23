@@ -73,6 +73,7 @@ class PauseState extends FlxSubState
 		//Registre.BGExt.startTimer();
 		FlxTimer.manager.active = true;
 		FlxTween.manager.active = true;
+		FlxG.sound.volume = 1;
 		close();
 	}
 
@@ -80,6 +81,7 @@ class PauseState extends FlxSubState
 	{
 		FlxTimer.manager.active = true;
 		FlxTween.manager.active = true;
+		FlxG.sound.volume = 1;
 		FlxG.switchState(new MenuState());
 	}
 

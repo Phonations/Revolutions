@@ -2,9 +2,11 @@ package ;
 
 import flixel.animation.FlxAnimation;
 import flixel.FlxSprite;
+import flixel.system.FlxSound;
 import flixel.util.FlxPoint;
 import flixel.FlxG;
 import flixel.util.FlxAngle;
+import flixel.system.FlxSound;
 
 import flixel.addons.nape.FlxNapeSprite;
 
@@ -22,6 +24,8 @@ class Spaceship extends FlxNapeSprite
 	public var angleAcceleration:Float = 0.1;
 	public var maxAngleVelocity:Float = 2;
 	public var engineAcceleration:Float = 1;
+	public var soundEngine : FlxSound;
+	
 
 	public function new(X:Float, Y:Float, space:Space)
 	{
@@ -36,6 +40,8 @@ class Spaceship extends FlxNapeSprite
 		animation.play('idle');
 		engine = false;
 		fuel = 600;
+		soundEngine = new FlxSound();
+		soundEngine=FlxG.sound.load("assets/sound/Boost.mp3",1,true);
 	}
 	override public function update () : Void
 	{
@@ -52,10 +58,12 @@ class Spaceship extends FlxNapeSprite
 		
 		if (fuel <= 0)
 			animation.play("idle");
+			//soundEngine.stop();
 		
 		if (!engine)
 		{
 			animation.play('idle');
+			soundEngine.stop();
 		}
 		
 		super.update();

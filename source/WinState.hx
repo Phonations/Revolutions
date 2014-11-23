@@ -12,6 +12,7 @@ import flixel.util.FlxColor;
 import flixel.text.FlxText;
 import flixel.util.FlxDestroyUtil;
 import flixel.addons.ui.FlxSlider;
+import flixel.system.FlxSound;
 
 /**
  * ...
@@ -54,6 +55,8 @@ class WinState extends FlxSubState
 		add(BGSprite);
 		add(startBtn);
 		add(winSprite);
+		
+		var s1 : FlxSound =FlxG.sound.load("assets/sound/Win.mp3",1,true);
 
 	}
 
