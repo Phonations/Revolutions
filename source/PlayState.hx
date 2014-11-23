@@ -53,6 +53,7 @@ class PlayState extends FlxNapeState
 	private var floorShape : FlxNapeSprite;
 	private var pauseSubState:PauseState;
 	private var tutoSubState:TutoState;
+	private var loseSubState:LoseState;
 	private var fuelBar : FlxBar;
 	private var fuelText : FlxText;
 	private var textTween : FlxTween;
@@ -66,7 +67,7 @@ class PlayState extends FlxNapeState
 		// Setup camera
 		FlxG.cameras.bgColor = 0xC2F8FF;
 
-		Registre.level = 2;
+		Registre.level = 4;
 		
 		cameraGame = new FlxCamera(0, 0, FlxG.width, FlxG.height);
 		FlxG.cameras.add(cameraGame);
@@ -121,8 +122,9 @@ class PlayState extends FlxNapeState
 		add(fuelText);
 		add(fuelBar);
 		
-		//setup pause state
+		//setup substates
 		pauseSubState = new PauseState();
+		loseSubState = new LoseState();
 		
 		//launch music
 		/*FlxG.sound.playMusic("assets/sound/musique_beat.ogg");
@@ -243,6 +245,13 @@ class PlayState extends FlxNapeState
 		if (player.fuel < 240)
 		{
 			fuelText.color = 0xff0000;
+		}
+		
+		if (player.fuel == 0)
+		{
+			FlxTimer.manager.active = false;
+			FlxTween.manager.active = false;
+			openSubState(loseSubState);
 		}
 
 		super.update();

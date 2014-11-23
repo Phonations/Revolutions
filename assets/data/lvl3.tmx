@@ -76,7 +76,7 @@
     <property name="MaxAngleVelocity" value="2"/>
    </properties>
   </object>
-  <object type="PlaneteEnd" gid="4" x="1388" y="2100">
+  <object type="PlaneteEnd" gid="4" x="1496" y="2392">
    <properties>
     <property name="mass" value="10"/>
     <property name="rayon" value="128"/>
@@ -89,7 +89,7 @@
     <property name="rayon" value="128"/>
    </properties>
   </object>
-  <object type="PlaneteCreuse" gid="1" x="1552" y="1152">
+  <object type="PlaneteCreuse" gid="1" x="1604" y="1208">
    <properties>
     <property name="mass" value="2"/>
     <property name="rayon" value="256"/>
