@@ -22,6 +22,8 @@ class TutoState extends FlxSubState
 	// Some test sprite, showing that if the state is persistant (not destroyed after closing)
 	// then it will save it's position (and all other properties)
 	private var BGSprite:FlxSprite;
+	private var moveSprite : FlxSprite;
+	private var startSprite : FlxSprite;
 	private var startBtn:FlxButton;
 	private var menuText :FlxText;
 
@@ -34,8 +36,9 @@ class TutoState extends FlxSubState
 		
 
 		startBtn = new FlxButton(500, 500, null, gotoGame);
-		//startBtn.loadGraphic("assets/images/Start.png", false, 120, 44);
+		startBtn.loadGraphic("assets/images/Play.png", false, 82, 58);
 		startBtn.x = (FlxG.width) / 2;
+		startBtn.y = (FlxG.height - startBtn.height) / 2+200;
 		
 
 		BGSprite = new FlxSprite(0, 0);
@@ -44,8 +47,24 @@ class TutoState extends FlxSubState
 		BGSprite.y = (FlxG.height - BGSprite.height) / 2;
 		BGSprite.alpha = 0.55;
 		BGSprite.scrollFactor.set();
+		
+		moveSprite = new FlxSprite(0, 0);
+		moveSprite.loadGraphic("assets/images/Move.png");
+		moveSprite.scale.set(.5, .5);
+		moveSprite.x = (FlxG.width - moveSprite.width) / 2;
+		moveSprite.y = (FlxG.height - moveSprite.height) / 2;
+		moveSprite.scrollFactor.set();
+		
+		startSprite = new FlxSprite(0, 0);
+		startSprite.loadGraphic("assets/images/Start.png");
+		startSprite.scale.set(.5, .5);
+		startSprite.x = (FlxG.width - startSprite.width) / 2;
+		startSprite.y = (FlxG.height - startSprite.height) / 2-200;
+		startSprite.scrollFactor.set();
 
 		add(BGSprite);
+		add(moveSprite);
+		add(startSprite);
 		add(startBtn);
 
 		_parentState.persistentUpdate = false;
