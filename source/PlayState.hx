@@ -185,13 +185,13 @@ class PlayState extends FlxNapeState
 		if (FlxG.keys.pressed.S || FlxG.keys.pressed.LEFT)
 
 		{
-			if (player.body.angularVel > -Registre.spaceshipMaxAngleVelocity)
-				player.body.angularVel -= Registre.spaceshipAngleAcceleration;
+			if (player.body.angularVel > -player.maxAngleVelocity)
+				player.body.angularVel -= player.angleAcceleration;
 		}
 		if (FlxG.keys.pressed.F || FlxG.keys.pressed.RIGHT)
 		{
-			if (player.body.angularVel < Registre.spaceshipMaxAngleVelocity)
-				player.body.angularVel += Registre.spaceshipAngleAcceleration;
+			if (player.body.angularVel < player.maxAngleVelocity)
+				player.body.angularVel += player.angleAcceleration;
 		}
 		player.engine = FlxG.keys.pressed.UP || FlxG.keys.pressed.E || FlxG.mouse.pressed;
 
@@ -251,11 +251,14 @@ class PlayState extends FlxNapeState
 				{
 					player.x = obj.x;
 					player.y = obj.y;
+					/*player.angleAcceleration=obj.custom.AngleAcceleration;
+					player.maxAngleVelocity=obj.custom.MaxAngleVelocity;
+					player.engineAcceleration=obj.custom.EngineAcceleration;*/
 				}
 				else
 				{
 					FlxG.log.add(space.gravity);
-					planets.add(new Planet(obj.x, obj.y, obj.type, obj.custom.mass, space));
+					planets.add(new Planet(obj.x, obj.y, obj.type,Std.parseInt(obj.custom.mass), space));
 				}			
 				
 			}

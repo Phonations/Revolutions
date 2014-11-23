@@ -18,6 +18,10 @@ class Spaceship extends FlxNapeSprite
 
 	public var engine : Bool;
 	public var fuel : Int;
+	//load by lvl
+	public var angleAcceleration:Float = 0.1;
+	public var maxAngleVelocity:Float = 2;
+	public var engineAcceleration:Float = 1;
 
 	public function new(X:Float, Y:Float, space:Space)
 	{

@@ -13,7 +13,7 @@ import nape.shape.*;
 class Planet extends FlxNapeSprite
 {
 	
-	public function new(X:Float, Y:Float, type : String, mass : String, space:Space)
+	public function new(X:Float, Y:Float, type : String, mass : Int, space:Space)
 	{
 		super(X, Y, null, false, true);
 		loadGraphic("assets/images/PlaneteStart.png");
