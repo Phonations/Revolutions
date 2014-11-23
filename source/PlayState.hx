@@ -269,9 +269,9 @@ class PlayState extends FlxNapeState
 		var tiledLevel : TiledMap = new TiledMap(data);	
 		
 		// Add spaceship
-		player = new Spaceship(FlxG.width / 2, FlxG.height / 2, space);
-		add(player);
-		player.velocity.x = 50;
+		//player = new Spaceship(FlxG.width / 2, FlxG.height / 2, space);
+		//add(player);
+		
 		
 		//add planets		
 		planets = new List<FlxNapeSprite>();
@@ -281,8 +281,9 @@ class PlayState extends FlxNapeState
 			{				
 				if (obj.type == 'player')
 				{
-					player.x = obj.x;
-					player.y = obj.y;
+					player = new Spaceship(obj.x, obj.y, space);
+					player.velocity.x = 50;
+		add(player);
 					player.angleAcceleration=Std.parseFloat(obj.custom.AngleAcceleration);
 					player.maxAngleVelocity=Std.parseFloat(obj.custom.MaxAngleVelocity);
 					player.engineAcceleration = Std.parseFloat(obj.custom.EngineAcceleration);
@@ -293,7 +294,7 @@ class PlayState extends FlxNapeState
 				{
 					FlxG.log.add(space.gravity);
 					FlxG.log.add(obj.custom.mass);
-					var planet:Planet = new Planet(obj.x, obj.y, obj.type, Std.parseFloat(obj.custom.mass), space);
+					var planet:Planet = new Planet(obj.x, obj.y, Std.parseFloat(obj.custom.rayon), obj.type, Std.parseFloat(obj.custom.mass), space);
 					planets.add(planet);
 					planet.cameras = [cameraGame];
 					add(planet);
