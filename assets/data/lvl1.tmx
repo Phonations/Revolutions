@@ -80,7 +80,7 @@
    </properties>
   </object>
   <object gid="8" x="3214" y="2069"/>
-  <object gid="4" x="1415" y="1308">
+  <object type="planet" gid="4" x="1415" y="1308">
    <properties>
     <property name="mass" value="5"/>
     <property name="rayon" value="128"/>
