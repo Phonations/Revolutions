@@ -214,9 +214,6 @@ class PlayState extends FlxNapeState
 			gravity.y += g * Math.sin(angle);
 		}
 
-		FlxG.log.add(gravity);
-		FlxG.log.add(player.angularVelocity);
-		FlxG.log.add(player.angle);
 		space.gravity = gravity;
 		
 		space.step(1 / 30);
@@ -253,6 +250,9 @@ class PlayState extends FlxNapeState
 				{
 					player.x = obj.x;
 					player.y = obj.y;
+					FlxG.log.add(obj.custom.AngleAcceleration);
+					FlxG.log.add(obj.custom.MaxAngleVelocity);
+					FlxG.log.add(obj.custom.EngineAcceleration);
 					player.angleAcceleration=Std.parseInt(obj.custom.AngleAcceleration);
 					player.maxAngleVelocity=Std.parseInt(obj.custom.MaxAngleVelocity);
 					player.engineAcceleration=Std.parseInt(obj.custom.EngineAcceleration);
