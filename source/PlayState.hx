@@ -258,7 +258,9 @@ class PlayState extends FlxNapeState
 				else
 				{
 					FlxG.log.add(space.gravity);
-					planets.add(new Planet(obj.x, obj.y, obj.type,Std.parseFloat(obj.custom.mass), space));
+					var planet:Planet = new Planet(obj.x, obj.y, obj.type, Std.parseFloat(obj.custom.mass), space);
+					planets.add(planet);
+					add(planet.orbit);
 				}			
 				
 			}
