@@ -18,7 +18,6 @@ class Spaceship extends FlxNapeSprite
 
 	public var engine : Bool;
 	public var fuel : Int;
-	private var fuelCoolDown : Int;
 
 	public function new(X:Float, Y:Float, space:Space)
 	{
@@ -28,29 +27,31 @@ class Spaceship extends FlxNapeSprite
 		body.space = space;
 		trace(width, height);
 		animation.add('idle', [0], 0);
-		animation.add('gaz', [1],0);
+		animation.add('gaz', [1], 0);
+		animation.add('lowgaz', [1,0,0,1,1,0,1,1,1,0],15,true);
 		animation.play('idle');
 		engine = false;
-		fuel = 10;
-		fuelCoolDown = 0;
+		fuel = 600;
 	}
 	override public function update () : Void
 	{
-		if (engine)
+		if (engine && fuel>0)
 		{
 			animation.play('gaz');
-			fuelCoolDown++;
 			
-			if (fuelCoolDown % 60 == 0)
-			{
-				fuel--;
-			}
+			if (fuel < 240)
+				animation.play('lowgaz');
+			
+			fuel--;
+
 		}
+		
+		if (fuel <= 0)
+			animation.play("idle");
 		
 		if (!engine)
 		{
 			animation.play('idle');
-			fuelCoolDown = 0;
 		}
 		
 		super.update();

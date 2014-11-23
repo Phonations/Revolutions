@@ -8,7 +8,6 @@ import flixel.util.FlxSave;
 class Registre
 {
 	public static var levels:Array<Dynamic> = [];
-	public static var lockedLevels:Array<Bool> = [];
 	public static var CoefScale : FlxPoint;
 	public static var mobileZoom : Int;
 	public static var level : Int;
