@@ -79,7 +79,6 @@
     <property name="MaxAngleVelocity" value="2"/>
    </properties>
   </object>
-  <object gid="8" x="3214" y="2069"/>
   <object type="planet" gid="4" x="1415" y="1308">
    <properties>
     <property name="mass" value="5"/>
