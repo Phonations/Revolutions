@@ -76,28 +76,7 @@
     <property name="MaxAngleVelocity" value="2"/>
    </properties>
   </object>
-  <object type="planet" gid="4" x="379" y="756">
-   <properties>
-    <property name="mass" value="-10"/>
-    <property name="rayon" value="128"/>
-    <property name="type" value="Plaete5"/>
-   </properties>
-  </object>
-  <object type="planet" gid="4" x="1320" y="964">
-   <properties>
-    <property name="mass" value="-10"/>
-    <property name="rayon" value="128"/>
-    <property name="type" value="Plaete5"/>
-   </properties>
-  </object>
-  <object type="planet" gid="4" x="972" y="2128">
-   <properties>
-    <property name="mass" value="-10"/>
-    <property name="rayon" value="128"/>
-    <property name="type" value="Plaete5"/>
-   </properties>
-  </object>
-  <object type="planet" gid="4" x="2184" y="2324">
+  <object type="planet" gid="4" x="1412" y="1368">
    <properties>
     <property name="mass" value="-10"/>
     <property name="rayon" value="128"/>
