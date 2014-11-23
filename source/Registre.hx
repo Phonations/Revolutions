@@ -16,5 +16,5 @@ class Registre
 	public static var saves:Array<FlxSave> = [];
 
 	
-	public static var gravitationConstant = 10000000;
+	public static var gravitationConstant = 100000;
 }

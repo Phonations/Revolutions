@@ -30,6 +30,7 @@ import nape.geom.*;
 import nape.phys.*;
 import nape.shape.*;
 import flixel.ui.FlxBar;
+import flixel.group.FlxGroup;
 
 
 class PlayState extends FlxNapeState
@@ -38,7 +39,7 @@ class PlayState extends FlxNapeState
 	private var spriteBG : FlxSprite;
 	private var spriteBG_stars : FlxSprite;
 	private var player : Spaceship;
-	private var planets : FlxSpriteGroup;
+	private var planets : List<FlxNapeSprite>;
 
 	private var space : Space;
 	
@@ -144,9 +145,7 @@ class PlayState extends FlxNapeState
 			FlxTween.manager.active = false;
 			tutoSubState = new TutoState();
 			openSubState(tutoSubState);
-		}
-
-
+		}		
 	}
 
 	override public function onFocusLost():Void
@@ -202,17 +201,19 @@ class PlayState extends FlxNapeState
 		{
 			playerAcceleration.x += player.engineAcceleration * Math.cos(FlxAngle.asRadians(player.angle));
 			playerAcceleration.y += player.engineAcceleration * Math.sin(FlxAngle.asRadians(player.angle));
+		//	FlxG.log.add(playerAcceleration);
 		}
 
 		var gravity:Vec2 = playerAcceleration;
 		
-		for (p in planets.members)
+		for (p in planets)
 		{
 			var d:Float = p.getMidpoint().distanceTo(player.getMidpoint());
-			var g = Registre.gravitationConstant / d / d;
+			var g = Registre.gravitationConstant * p.body.mass / d / d;
 			var angle = FlxAngle.angleBetweenPoint(player, p.getMidpoint(), false);
 			gravity.x += g * Math.cos(angle);
 			gravity.y += g * Math.sin(angle);
+			FlxG.log.add(p.body.mass);
 		}
 
 		space.gravity = gravity;
@@ -241,8 +242,7 @@ class PlayState extends FlxNapeState
 		player.velocity.x = 50;
 		
 		//add planets		
-		planets = new FlxSpriteGroup();		
-		add(planets);
+		planets = new List<FlxNapeSprite>();
 		for (group in tiledLevel.objectGroups)
 		{
 			for (obj in group.objects)
@@ -254,13 +254,15 @@ class PlayState extends FlxNapeState
 					player.angleAcceleration=Std.parseFloat(obj.custom.AngleAcceleration);
 					player.maxAngleVelocity=Std.parseFloat(obj.custom.MaxAngleVelocity);
 					player.engineAcceleration=Std.parseFloat(obj.custom.EngineAcceleration);
-					FlxG.log.add(obj.custom.AngleAcceleration);
-					FlxG.log.add(player.angleAcceleration);
 				}
 				else
 				{
 					FlxG.log.add(space.gravity);
-					planets.add(new Planet(obj.x, obj.y, obj.type,Std.parseInt(obj.custom.mass), space));
+					FlxG.log.add(obj.custom.mass);
+					var planet:Planet = new Planet(obj.x, obj.y, obj.type, Std.parseFloat(obj.custom.mass), space);
+					planets.add(planet);
+					planet.cameras = [cameraGame];
+					add(planet);
 				}			
 				
 			}
