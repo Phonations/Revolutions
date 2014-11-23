@@ -21,6 +21,8 @@ class Planet extends FlxNapeSprite
 		loadGraphic("assets/images/PlaneteStart.png");
 		createCircularBody(128, BodyType.STATIC);
 		body.space = space;
-		orbit = new Orbit(mass);
+		/*orbit = new Orbit(mass);
+		orbit.x = x;
+		orbit.y = y;*/
 	}		
 }
