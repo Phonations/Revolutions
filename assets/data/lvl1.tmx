@@ -76,11 +76,10 @@
     <property name="MaxAngleVelocity" value="2"/>
    </properties>
   </object>
-  <object type="planet" gid="4" x="972" y="2128">
+  <object type="PlaneteStart" gid="5" x="944" y="1408">
    <properties>
     <property name="mass" value="1"/>
     <property name="rayon" value="128"/>
-    <property name="type" value="Plaete5"/>
    </properties>
   </object>
  </objectgroup>
