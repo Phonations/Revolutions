@@ -69,7 +69,7 @@ class PlayState extends FlxNapeState
 		// Setup camera
 		FlxG.cameras.bgColor = 0xC2F8FF;
 
-		Registre.level = 4;
+		Registre.level = 6;
 		
 		cameraGame = new FlxCamera(0, 0, FlxG.width, FlxG.height);
 		FlxG.cameras.add(cameraGame);
@@ -294,7 +294,7 @@ class PlayState extends FlxNapeState
 				{
 					FlxG.log.add(space.gravity);
 					FlxG.log.add(obj.custom.mass);
-					var planet:Planet = new Planet(obj.x, obj.y, obj.type, Std.parseFloat(obj.custom.mass), space);
+					var planet:Planet = new Planet(obj.x, obj.y, Std.parseFloat(obj.custom.rayon), obj.type, Std.parseFloat(obj.custom.mass), space);
 					planets.add(planet);
 					planet.cameras = [cameraGame];
 					add(planet);
