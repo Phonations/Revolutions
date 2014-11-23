@@ -39,7 +39,7 @@ class WinState extends FlxSubState
 		
 		winSprite = new FlxSprite(0,0);
 		winSprite.loadGraphic('assets/images/YouWin.png');
-		winSprite.x = (FlxG.width-loseSprite.width) / 2;
+		winSprite.x = (FlxG.width-winSprite.width) / 2;
 		winSprite.y = (FlxG.height - winSprite.height) / 2;
 		winSprite.scale.set(.5,.5);
 		winSprite.scrollFactor.set();
