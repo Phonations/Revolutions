@@ -71,48 +71,20 @@
   <image source="../../../../../../../GAMEJAM/RevolutionS/maquettage/gabari-ecran.png" width="1920" height="1080"/>
  </tileset>
  <objectgroup name="Calque d'objets 1">
-  <object gid="2" x="221.288" y="456.7">
+  <object type="player" gid="2" x="1245.29" y="1508.7">
    <properties>
-    <property name="EngineAcceleration" value=""/>
+    <property name="AngleAcceleration" value="0.001"/>
+    <property name="EngineAcceleration" value="0.01"/>
     <property name="G" value=""/>
-    <property name="MaxAngleVelocity" value=""/>
-    <property name="RotationAcceleration" value=""/>
-   </properties>
-  </object>
-  <object gid="5" x="136" y="348">
-   <properties>
-    <property name="mass" value="5"/>
-    <property name="rayon" value="128"/>
-    <property name="type" value="planete1"/>
-   </properties>
-  </object>
-  <object gid="6" x="624" y="1228">
-   <properties>
-    <property name="mass" value="10"/>
-    <property name="rayon" value="64"/>
-    <property name="type" value="planete3"/>
+    <property name="MaxAngleVelocity" value="0.1"/>
    </properties>
   </object>
   <object gid="8" x="3214" y="2069"/>
-  <object gid="4" x="971" y="1860">
+  <object gid="4" x="1415" y="1308">
    <properties>
     <property name="mass" value="5"/>
     <property name="rayon" value="128"/>
     <property name="type" value="Plaete5"/>
-   </properties>
-  </object>
-  <object gid="1" x="1148" y="2632">
-   <properties>
-    <property name="mass" value="-5"/>
-    <property name="rayon" value="256"/>
-    <property name="type" value="Planete4"/>
-   </properties>
-  </object>
-  <object gid="7" x="1364" y="1420" width="2">
-   <properties>
-    <property name="mass" value="2"/>
-    <property name="rayon" value="512"/>
-    <property name="type" value="planete2"/>
    </properties>
   </object>
  </objectgroup>
