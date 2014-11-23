@@ -9,10 +9,13 @@ import nape.space.*;
 import nape.geom.*;
 import nape.phys.*;
 import nape.shape.*;
+import Orbit;
 
 class Planet extends FlxNapeSprite
 {
+	public var orbit:Orbit;
 	public var type:String;
+
 	public function new(X:Float, Y:Float, _type : String, mass : Float, space:Space)
 	{
 		super(X, Y, null, false, true);
@@ -22,5 +25,8 @@ class Planet extends FlxNapeSprite
 		createCircularBody(128, BodyType.STATIC);
 		setBodyMaterial(1, 0.2, 0.4, mass);
 		body.space = space;
+		/*orbit = new Orbit(mass);
+		orbit.x = x;
+		orbit.y = y;*/
 	}		
 }

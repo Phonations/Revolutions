@@ -161,7 +161,7 @@ class PlayState extends FlxNapeState
 			FlxTween.manager.active = false;
 			tutoSubState = new TutoState();
 			openSubState(tutoSubState);
-		}		
+		}
 	}
 
 	override public function onFocusLost():Void
@@ -292,6 +292,7 @@ class PlayState extends FlxNapeState
 				else
 				{
 					FlxG.log.add(space.gravity);
+					
 					FlxG.log.add(obj.custom.mass);
 					var planet:Planet = new Planet(obj.x, obj.y, obj.type, Std.parseFloat(obj.custom.mass), space);
 					planets.add(planet);
@@ -303,6 +304,12 @@ class PlayState extends FlxNapeState
 						planet.body.cbTypes.add(startCollisionType);
 					else
 						planet.body.cbTypes.add(planetCollisionType);
+
+								planet.orbit = new Orbit(planet.mass);
+					// set midpoint of the orbit to the planet midpoint
+					planet.orbit.x = planet.x-planet.orbit.width/2;
+					planet.orbit.y = planet.y-planet.orbit.height/2;
+					add(planet.orbit);
 				}
 			}
 		}	
