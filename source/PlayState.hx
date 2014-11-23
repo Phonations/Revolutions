@@ -3,6 +3,7 @@ package;
 import flixel.FlxBasic;
 import flixel.group.FlxSpriteGroup;
 import flixel.group.FlxTypedGroup;
+import haxe.ds.Vector;
 import flixel.system.FlxSound;
 import flixel.text.FlxText;
 import openfl.geom.Point;
@@ -11,9 +12,7 @@ import Std;
 import flixel.FlxG;
 import flixel.FlxState;
 import flixel.tile.FlxTilemap;
-import flixel.util.FlxMath;
-import flixel.util.FlxPoint;
-import flixel.FlxCamera;
+import flixel.*;
 import CameraMove;
 import flixel.system.frontEnds.DebuggerFrontEnd;
 //import LevelManager;
@@ -22,37 +21,39 @@ import  flixel.tweens.FlxEase;
 import flixel.FlxSprite;
 import flixel.util.FlxColor;
 import flixel.ui.FlxButton;
-import flixel.util.FlxTimer;
-import flixel.util.FlxDestroyUtil;
-import flixel.util.FlxAngle;
 import Spaceship;
-import flixel.util.FlxAngle;
-
-import flixel.addons.editors.tiled.TiledLayer;
-import flixel.addons.editors.tiled.TiledMap;
-import flixel.addons.editors.tiled.TiledObject;
-import flixel.addons.editors.tiled.TiledObjectGroup;
-import flixel.addons.editors.tiled.TiledTile;
-import flixel.addons.editors.tiled.TiledTileSet;
+import flixel.util.*;
+import flixel.addons.editors.tiled.*;
+import flixel.addons.nape.*;
+import nape.space.*;
+import nape.geom.*;
+import nape.phys.*;
+import nape.shape.*;
 import flixel.ui.FlxBar;
 
-class PlayState extends FlxState
+
+class PlayState extends FlxNapeState
 {
 	public var cameraGame : FlxCamera;
 	private var spriteBG : FlxSprite;
 	private var spriteBG_stars : FlxSprite;
 	private var player : Spaceship;
 	private var planets : FlxSpriteGroup;
+
+	private var space : Space;
+	
+	private var floorShape : FlxNapeSprite;
 	private var pauseSubState:PauseState;
 	private var tutoSubState:TutoState;
 	private var fuelBar : FlxBar;
 	private var fuelText : FlxText;
 	private var textTween : FlxTween;
 
-
 	override public function create():Void
 	{
 		super.create();
+
+		FlxG.debugger.visible = true;
 
 		// Setup camera
 		FlxG.cameras.bgColor = 0xC2F8FF;
@@ -86,7 +87,10 @@ class PlayState extends FlxState
 		FlxG.debugger.visible = true;
 
 		FlxG.autoPause = false;
-
+		
+		// Setup physics
+		space = new Space(new Vec2(0, 0));
+		
 		//load level
 		loadLevel("assets/data/lvl" + Registre.level + ".tmx");		
 		cameraGame.follow(player);
@@ -179,12 +183,42 @@ class PlayState extends FlxState
 		}
 		
 		if (FlxG.keys.pressed.S || FlxG.keys.pressed.LEFT)
-			player.angle -= Registre.keyPressedAngleAcceleration;
-			
+
+		{
+			if (player.body.angularVel > -Registre.maxVelocityRotation)
+				player.body.angularVel -= Registre.keyPressedAngleAcceleration;
+		}
 		if (FlxG.keys.pressed.F || FlxG.keys.pressed.RIGHT)
-			player.angle += Registre.keyPressedAngleAcceleration;
-			
+		{
+			if (player.body.angularVel < Registre.maxVelocityRotation)
+				player.body.angularVel += Registre.keyPressedAngleAcceleration;
+		}
 		player.engine = FlxG.keys.pressed.UP || FlxG.keys.pressed.E || FlxG.mouse.pressed;
+
+		var gravity:Vec2 = new Vec2(0, 0);
+		if (player.engine && (player.fuel>0))
+		{
+			var k:Float = 1000;
+			gravity.x += k * Math.cos(FlxAngle.asRadians(player.angle));
+			gravity.y += k * Math.sin(FlxAngle.asRadians(player.angle));
+		}
+		
+		for (p in planets.members)
+		{
+			var d:Float = p.getMidpoint().distanceTo(player.getMidpoint());
+			var g = 10000000 / d / d;
+			var angle = FlxAngle.angleBetweenPoint(player, p.getMidpoint(), false);
+			gravity.x += g * Math.cos(angle);
+			gravity.y += g * Math.sin(angle);
+		}
+
+		FlxG.log.add(gravity);
+		FlxG.log.add(player.angularVelocity);
+		FlxG.log.add(player.angle);
+		space.gravity = gravity;
+		
+		space.step(1 / 30);
+
 		//update fuelbar
 		fuelBar.currentValue = player.fuel;
 		
@@ -192,6 +226,7 @@ class PlayState extends FlxState
 		{
 			fuelText.color = 0xff0000;
 		}
+
 		super.update();
 	}
 
@@ -201,7 +236,7 @@ class PlayState extends FlxState
 		
 		
 		// Add spaceship
-		player = new Spaceship(FlxG.width / 2, FlxG.height / 2);
+		player = new Spaceship(FlxG.width / 2, FlxG.height / 2, space);
 		add(player);
 		player.velocity.x = 50;
 		
@@ -219,7 +254,8 @@ class PlayState extends FlxState
 				}
 				else
 				{
-					planets.add(new Planet(obj.x, obj.y, obj.type, obj.custom.mass));
+					FlxG.log.add(space.gravity);
+					planets.add(new Planet(obj.x, obj.y, obj.type, obj.custom.mass, space));
 				}			
 				
 			}

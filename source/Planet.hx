@@ -2,15 +2,23 @@ package ;
 
 import flixel.animation.FlxAnimation;
 import flixel.FlxSprite;
-import flixel.util.FlxPoint;
 import flixel.FlxG;
+import flixel.addons.nape.FlxNapeSprite;
+import flixel.util.*;
+import nape.space.*;
+import nape.geom.*;
+import nape.phys.*;
+import nape.shape.*;
 
-class Planet extends FlxSprite
+class Planet extends FlxNapeSprite
 {
 	
-	public function new(X:Float=0, Y:Float=0, type : String, mass : String) 
+	public function new(X:Float, Y:Float, type : String, mass : String, space:Space)
 	{
-		super(X, Y);
-		loadGraphic("assets/images/PlaneteCreuse.png", true, 512, 512);
+		super(X, Y, null, false, true);
+		loadGraphic("assets/images/PlaneteStart.png");
+		//makeGraphic(512, 512, FlxColor.CORAL);
+		createCircularBody(128, BodyType.STATIC);
+		body.space = space;
 	}		
 }
