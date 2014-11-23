@@ -71,7 +71,7 @@
   <object type="player" gid="2" x="1245.29" y="1508.7">
    <properties>
     <property name="AngleAcceleration" value="0.1"/>
-    <property name="EngineAcceleration" value="0.01"/>
+    <property name="EngineAcceleration" value="1"/>
     <property name="G" value=""/>
     <property name="MaxAngleVelocity" value="2"/>
    </properties>
