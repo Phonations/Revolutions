@@ -119,13 +119,13 @@ class PlayState extends FlxNapeState
 		FlxG.sound.playMusic("assets/sound/musique_split_tabular.ogg");
 		FlxG.sound.playMusic("assets/sound/musique_harpolodic.ogg");*/
 		
-		var s1 : FlxSound =FlxG.sound.load("assets/sound/musique_beat.ogg",1,true);
-		var s2 : FlxSound=FlxG.sound.load("assets/sound/musique_butterfly.ogg",1,true);
-		var s3 : FlxSound=FlxG.sound.load("assets/sound/musique_glass.ogg",1,true);
-		var s4 : FlxSound=FlxG.sound.load("assets/sound/musique_glassy.ogg",1,true);
-		var s5 : FlxSound=FlxG.sound.load("assets/sound/musique_tabular.ogg",1,true);
-		var s6 : FlxSound=FlxG.sound.load("assets/sound/musique_split_tabular.ogg",1,true);
-		var s7 : FlxSound = FlxG.sound.load("assets/sound/musique_harpolodic.ogg", 1, true);
+		var s1 : FlxSound =FlxG.sound.load("assets/sound/musique_beat.mp3",1,true);
+		var s2 : FlxSound=FlxG.sound.load("assets/sound/musique_butterfly.mp3",1,true);
+		var s3 : FlxSound=FlxG.sound.load("assets/sound/musique_glass.mp3",1,true);
+		var s4 : FlxSound=FlxG.sound.load("assets/sound/musique_glassy.mp3",1,true);
+		var s5 : FlxSound=FlxG.sound.load("assets/sound/musique_tabular.mp3",1,true);
+		var s6 : FlxSound=FlxG.sound.load("assets/sound/musique_split_tabular.mp3",1,true);
+		var s7 : FlxSound = FlxG.sound.load("assets/sound/musique_harpolodic.mp3", 1, true);
 		
 		s1.play();
 		s2.play();

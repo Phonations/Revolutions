@@ -47,13 +47,13 @@ class MenuState extends FlxState
 		spriteBG.updateHitbox();
 		
 		//loading sounds to avoid slowdowd at first lvl
-		FlxG.sound.load("assets/sound/musique_beat.ogg");
-		FlxG.sound.load("assets/sound/musique_butterfly.ogg");
-		FlxG.sound.load("assets/sound/musique_glass.ogg");
-		FlxG.sound.load("assets/sound/musique_glassy.ogg");
-		FlxG.sound.load("assets/sound/musique_tabular.ogg");
-		FlxG.sound.load("assets/sound/musique_split_tabular.ogg");
-		FlxG.sound.load("assets/sound/musique_harpolodic.ogg");
+		FlxG.sound.load("assets/sound/musique_beat.mp3");
+		FlxG.sound.load("assets/sound/musique_butterfly.mp3");
+		FlxG.sound.load("assets/sound/musique_glass.mp3");
+		FlxG.sound.load("assets/sound/musique_glassy.mp3");
+		FlxG.sound.load("assets/sound/musique_tabular.mp3");
+		FlxG.sound.load("assets/sound/musique_split_tabular.mp3");
+		FlxG.sound.load("assets/sound/musique_harpolodic.mp3");
 
 
 		add(spriteBG);
