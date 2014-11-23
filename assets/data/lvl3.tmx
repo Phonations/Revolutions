@@ -79,50 +79,50 @@
   <object type="PlaneteEnd" gid="4" x="2708" y="2608">
    <properties>
     <property name="mass" value="4"/>
-    <property name="rayon" value="128"/>
+    <property name="rayon" value="1"/>
     <property name="type" value="Plaete5"/>
    </properties>
   </object>
   <object type="PlaneteStart" gid="5" x="448" y="860">
    <properties>
     <property name="mass" value="1"/>
-    <property name="rayon" value="125"/>
+    <property name="rayon" value="1"/>
    </properties>
   </object>
   <object type="PlaneteCreuse" gid="1" x="1304" y="2532">
    <properties>
     <property name="mass" value="1"/>
-    <property name="rayon" value="150"/>
+    <property name="rayon" value="1"/>
    </properties>
   </object>
   <object type="PlaneteCreuse" gid="1" x="1980" y="3124">
    <properties>
     <property name="mass" value="1"/>
-    <property name="rayon" value="150"/>
+    <property name="rayon" value="1"/>
    </properties>
   </object>
   <object type="PlaneteCreuse" gid="1" x="504" y="1860">
    <properties>
     <property name="mass" value="1"/>
-    <property name="rayon" value="150"/>
+    <property name="rayon" value="1"/>
    </properties>
   </object>
   <object type="PlaneteCreuse" gid="1" x="1428" y="808">
    <properties>
     <property name="mass" value="1"/>
-    <property name="rayon" value="150"/>
+    <property name="rayon" value="1"/>
    </properties>
   </object>
   <object type="PlaneteCreuse" gid="1" x="2112" y="1200">
    <properties>
     <property name="mass" value="1"/>
-    <property name="rayon" value="150"/>
+    <property name="rayon" value="1"/>
    </properties>
   </object>
   <object type="PlaneteCreuse" gid="1" x="2552" y="2012">
    <properties>
     <property name="mass" value="1"/>
-    <property name="rayon" value="150"/>
+    <property name="rayon" value="1"/>
    </properties>
   </object>
   <object type="PlaneteTellurique" gid="6" x="1376" y="1536">
