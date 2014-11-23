@@ -76,7 +76,7 @@
     <property name="MaxAngleVelocity" value="2"/>
    </properties>
   </object>
-  <object type="PlaneteEnd" gid="4" x="2704" y="3024">
+  <object type="PlaneteEnd" gid="4" x="2708" y="2608">
    <properties>
     <property name="mass" value="4"/>
     <property name="rayon" value="128"/>
@@ -89,19 +89,7 @@
     <property name="rayon" value="128"/>
    </properties>
   </object>
-  <object type="PlaneteCreuse" gid="1" x="1104" y="932">
-   <properties>
-    <property name="mass" value="1"/>
-    <property name="rayon" value="256"/>
-   </properties>
-  </object>
-  <object type="PlaneteCreuse" gid="1" x="1988" y="1712">
-   <properties>
-    <property name="mass" value="1.5"/>
-    <property name="rayon" value="256"/>
-   </properties>
-  </object>
-  <object type="PlaneteCreuse" gid="1" x="1092" y="2328">
+  <object type="PlaneteCreuse" gid="1" x="1112" y="2412">
    <properties>
     <property name="mass" value="1"/>
     <property name="rayon" value="256"/>
@@ -113,10 +101,28 @@
     <property name="rayon" value="256"/>
    </properties>
   </object>
-  <object type="PlaneteCreuse" gid="1" x="544" y="1632">
+  <object type="PlaneteCreuse" gid="1" x="672" y="1640">
    <properties>
     <property name="mass" value="1"/>
     <property name="rayon" value="256"/>
+   </properties>
+  </object>
+  <object type="PlaneteGazeuse" gid="7" x="768" y="820">
+   <properties>
+    <property name="mass" value="0.1"/>
+    <property name="rayon" value="500"/>
+   </properties>
+  </object>
+  <object type="PlaneteGazeuse" gid="7" x="-144" y="3580">
+   <properties>
+    <property name="mass" value="0.1"/>
+    <property name="rayon" value="500"/>
+   </properties>
+  </object>
+  <object type="PlaneteGazeuse" gid="7" x="1804" y="2068">
+   <properties>
+    <property name="mass" value="0.1"/>
+    <property name="rayon" value="500"/>
    </properties>
   </object>
  </objectgroup>
