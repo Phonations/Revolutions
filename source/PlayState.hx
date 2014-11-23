@@ -197,13 +197,14 @@ class PlayState extends FlxNapeState
 		}
 		player.engine = FlxG.keys.pressed.UP || FlxG.keys.pressed.E || FlxG.mouse.pressed;
 
-		var gravity:Vec2 = new Vec2(0, 0);
+		var playerAcceleration:Vec2 = new Vec2(0, 0);
 		if (player.engine && (player.fuel>0))
 		{
-			var k:Float = 1000;
-			gravity.x += k * Math.cos(FlxAngle.asRadians(player.angle));
-			gravity.y += k * Math.sin(FlxAngle.asRadians(player.angle));
+			playerAcceleration.x += player.engineAcceleration * Math.cos(FlxAngle.asRadians(player.angle));
+			playerAcceleration.y += player.engineAcceleration * Math.sin(FlxAngle.asRadians(player.angle));
 		}
+
+		var gravity:Vec2 = playerAcceleration;
 		
 		for (p in planets.members)
 		{
