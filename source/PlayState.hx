@@ -196,7 +196,7 @@ class PlayState extends FlxNapeState
 		player.engine = FlxG.keys.pressed.UP || FlxG.keys.pressed.E || FlxG.mouse.pressed;
 
 		var gravity:Vec2 = new Vec2(0, 0);
-		if (player.engine)
+		if (player.engine && (player.fuel>0))
 		{
 			var k:Float = 1000;
 			gravity.x += k * Math.cos(FlxAngle.asRadians(player.angle));
