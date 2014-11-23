@@ -76,19 +76,5 @@
     <property name="MaxAngleVelocity" value="2"/>
    </properties>
   </object>
-  <object gid="4" x="695" y="1336">
-   <properties>
-    <property name="mass" value="5"/>
-    <property name="rayon" value="128"/>
-    <property name="type" value="Plaete5"/>
-   </properties>
-  </object>
-  <object gid="7" x="1692" y="1756">
-   <properties>
-    <property name="mass" value="1"/>
-    <property name="rayon" value="512"/>
-    <property name="type" value="2"/>
-   </properties>
-  </object>
  </objectgroup>
 </map>
