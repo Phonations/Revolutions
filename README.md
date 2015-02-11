@@ -1,6 +1,8 @@
 Revolutions
 ===========
 
+[![Gratipay](https://img.shields.io/gratipay/MartinDelille.svg)](https://gratipay.com/MartinDelille)
+
 Game dev party #7 Lyon
 
 Setup
